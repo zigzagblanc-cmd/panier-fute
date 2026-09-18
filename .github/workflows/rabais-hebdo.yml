@@ -1,0 +1,60 @@
+# .github/workflows/rabais-hebdo.yml
+#
+# Lance panier_fute_scraper.py automatiquement chaque semaine (gratuit sur GitHub
+# Actions pour un usage comme celui-ci) et commit le résultat dans data/rabais.json.
+#
+# CONFIGURATION REQUISE (une seule fois) :
+# 1. Créez un dépôt GitHub (privé de préférence, pour ne pas exposer votre code postal).
+# 2. Mettez panier_fute_scraper.py à la racine (ou dans un dossier scraper/, en
+#    ajustant le chemin ci-dessous).
+# 3. Dans Settings > Secrets and variables > Actions > Variables, ajoutez :
+#    - POSTAL_CODE : votre code postal, ex. J2G1A1
+#    - STORES      : vos magasins, ex. IGA,Maxi,Metro,Super C
+# 4. Settings > Actions > General > Workflow permissions : cochez
+#    "Read and write permissions" pour que le workflow puisse commit le résultat.
+
+name: Mise à jour hebdomadaire des rabais
+
+on:
+  schedule:
+    # 11h00 UTC = 6h00 ou 7h00 heure de l'Est selon l'heure d'été/hiver — dimanche
+    - cron: "0 11 * * 0"
+  workflow_dispatch: {}   # bouton "Run workflow" pour tester manuellement
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer les dépendances
+        run: pip install requests
+
+      - name: Exécuter le script
+        env:
+          PANIER_FUTE_POSTAL_CODE: ${{ vars.POSTAL_CODE }}
+          PANIER_FUTE_STORES: ${{ vars.STORES }}
+        run: python panier_fute_scraper.py
+
+      - name: Conserver le fichier comme artefact téléchargeable
+        uses: actions/upload-artifact@v4
+        with:
+          name: rabais-semaine
+          path: data/rabais.json
+
+      - name: Commit le nouveau fichier dans le dépôt
+        run: |
+          git config user.name "panier-fute-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/rabais.json
+          git commit -m "Rabais du $(date +%F)" || echo "Rien de nouveau à commit"
+          git push
