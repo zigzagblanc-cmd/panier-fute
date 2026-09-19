@@ -1,5 +1,5 @@
 {
-  "genere_le": "2026-09-18T20:57:25.478773+00:00",
+  "genere_le": "2026-09-19T00:35:20.336519+00:00",
   "code_postal": "J1X2P1",
   "magasins_demandes": [
     "IGA",
@@ -10,6 +10,214 @@
     "Wallmart."
   ],
   "rabais": [
+    {
+      "ingredient": "PROTEIN SNACKS",
+      "magasin": "IGA",
+      "prix": 4.49,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "GRANDE POUTINE AU POULET EFFILOCHÉ",
+      "magasin": "IGA",
+      "prix": 9.99,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-08-27T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "Repas pépites de poulet",
+      "magasin": "IGA",
+      "prix": 5.99,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "GOURMET SALAD",
+      "magasin": "IGA",
+      "prix": 2.9,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "Mercredi L'américain",
+      "magasin": "IGA",
+      "prix": 6.99,
+      "valide_du": "2026-09-02T00:00:00-04:00",
+      "valide_au": "2026-09-02T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "C'EST PRÊT! (16 in.) HOT PIZZA",
+      "magasin": "IGA",
+      "prix": 16.99,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "THE PORTUGUESE",
+      "magasin": "IGA",
+      "prix": 6.99,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-08-27T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "BARBECUED CHICKEN MEAL",
+      "magasin": "IGA",
+      "prix": 25.99,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "THE LUXURY",
+      "magasin": "IGA",
+      "prix": 6.99,
+      "valide_du": "2026-08-30T00:00:00-04:00",
+      "valide_au": "2026-08-30T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "C'EST PRÊT! LUNCH BOX",
+      "magasin": "IGA",
+      "prix": 6.99,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "CAESAR'S TENDER",
+      "magasin": "IGA",
+      "prix": 6.99,
+      "valide_du": "2026-09-01T00:00:00-04:00",
+      "valide_au": "2026-09-01T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "FRIED CHICKEN MEAL",
+      "magasin": "IGA",
+      "prix": 35.99,
+      "valide_du": "2026-08-26T00:00:00-04:00",
+      "valide_au": "2026-08-26T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "C'EST PRÊT! BARBECUE SAUCE",
+      "magasin": "IGA",
+      "prix": 3.99,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "Poulet avec frites fraîches, sauce et salade",
+      "magasin": "IGA",
+      "prix": 23.99,
+      "valide_du": "2026-08-28T00:00:00-04:00",
+      "valide_au": "2026-08-28T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "LUNCH BOX",
+      "magasin": "IGA",
+      "prix": 6.99,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "THE CAJUN",
+      "magasin": "IGA",
+      "prix": 6.99,
+      "valide_du": "2026-08-29T00:00:00-04:00",
+      "valide_au": "2026-08-29T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "REPAS POUR 2 Un repas cuisse de poulet et un repas poitrine de poulet",
+      "magasin": "IGA",
+      "prix": 15.0,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "PROTEIN SNACKS",
+      "magasin": "IGA",
+      "prix": 4.49,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "PROTEIN SNACKS",
+      "magasin": "IGA",
+      "prix": 4.49,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "Pizza Fraîche Style New York C'EST PRÉT!",
+      "magasin": "IGA",
+      "prix": 19.99,
+      "valide_du": "2026-08-30T00:00:00-04:00",
+      "valide_au": "2026-08-30T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "SOUP BOWL",
+      "magasin": "IGA",
+      "prix": 3.79,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "HOT PIZZA",
+      "magasin": "IGA",
+      "prix": 16.99,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "HOT PIZZA SLICE",
+      "magasin": "IGA",
+      "prix": 4.99,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "FRIDAY THE NORDIC",
+      "magasin": "IGA",
+      "prix": 6.99,
+      "valide_du": "2026-08-28T00:00:00-04:00",
+      "valide_au": "2026-08-28T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "C'EST PRÊT! PROTEIN SNACKS",
+      "magasin": "IGA",
+      "prix": 4.49,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
+    {
+      "ingredient": "SANDWICH DAGWOOD",
+      "magasin": "IGA",
+      "prix": 13.0,
+      "valide_du": "2026-08-27T00:00:00-04:00",
+      "valide_au": "2026-09-23T23:59:59-04:00",
+      "familial": false
+    },
     {
       "ingredient": "COURGES | SQUASHES",
       "magasin": "Metro",
@@ -2775,214 +2983,6 @@
       "magasin": "Metro",
       "prix": 3.79,
       "valide_du": "2026-09-17T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "PROTEIN SNACKS",
-      "magasin": "IGA",
-      "prix": 4.49,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "GRANDE POUTINE AU POULET EFFILOCHÉ",
-      "magasin": "IGA",
-      "prix": 9.99,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-08-27T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "Repas pépites de poulet",
-      "magasin": "IGA",
-      "prix": 5.99,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "GOURMET SALAD",
-      "magasin": "IGA",
-      "prix": 2.9,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "Mercredi L'américain",
-      "magasin": "IGA",
-      "prix": 6.99,
-      "valide_du": "2026-09-02T00:00:00-04:00",
-      "valide_au": "2026-09-02T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "C'EST PRÊT! (16 in.) HOT PIZZA",
-      "magasin": "IGA",
-      "prix": 16.99,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "THE PORTUGUESE",
-      "magasin": "IGA",
-      "prix": 6.99,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-08-27T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "BARBECUED CHICKEN MEAL",
-      "magasin": "IGA",
-      "prix": 25.99,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "THE LUXURY",
-      "magasin": "IGA",
-      "prix": 6.99,
-      "valide_du": "2026-08-30T00:00:00-04:00",
-      "valide_au": "2026-08-30T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "C'EST PRÊT! LUNCH BOX",
-      "magasin": "IGA",
-      "prix": 6.99,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "CAESAR'S TENDER",
-      "magasin": "IGA",
-      "prix": 6.99,
-      "valide_du": "2026-09-01T00:00:00-04:00",
-      "valide_au": "2026-09-01T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "FRIED CHICKEN MEAL",
-      "magasin": "IGA",
-      "prix": 35.99,
-      "valide_du": "2026-08-26T00:00:00-04:00",
-      "valide_au": "2026-08-26T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "C'EST PRÊT! BARBECUE SAUCE",
-      "magasin": "IGA",
-      "prix": 3.99,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "Poulet avec frites fraîches, sauce et salade",
-      "magasin": "IGA",
-      "prix": 23.99,
-      "valide_du": "2026-08-28T00:00:00-04:00",
-      "valide_au": "2026-08-28T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "LUNCH BOX",
-      "magasin": "IGA",
-      "prix": 6.99,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "THE CAJUN",
-      "magasin": "IGA",
-      "prix": 6.99,
-      "valide_du": "2026-08-29T00:00:00-04:00",
-      "valide_au": "2026-08-29T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "REPAS POUR 2 Un repas cuisse de poulet et un repas poitrine de poulet",
-      "magasin": "IGA",
-      "prix": 15.0,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "PROTEIN SNACKS",
-      "magasin": "IGA",
-      "prix": 4.49,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "PROTEIN SNACKS",
-      "magasin": "IGA",
-      "prix": 4.49,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "Pizza Fraîche Style New York C'EST PRÉT!",
-      "magasin": "IGA",
-      "prix": 19.99,
-      "valide_du": "2026-08-30T00:00:00-04:00",
-      "valide_au": "2026-08-30T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "SOUP BOWL",
-      "magasin": "IGA",
-      "prix": 3.79,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "HOT PIZZA",
-      "magasin": "IGA",
-      "prix": 16.99,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "HOT PIZZA SLICE",
-      "magasin": "IGA",
-      "prix": 4.99,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "FRIDAY THE NORDIC",
-      "magasin": "IGA",
-      "prix": 6.99,
-      "valide_du": "2026-08-28T00:00:00-04:00",
-      "valide_au": "2026-08-28T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "C'EST PRÊT! PROTEIN SNACKS",
-      "magasin": "IGA",
-      "prix": 4.49,
-      "valide_du": "2026-08-27T00:00:00-04:00",
-      "valide_au": "2026-09-23T23:59:59-04:00",
-      "familial": false
-    },
-    {
-      "ingredient": "SANDWICH DAGWOOD",
-      "magasin": "IGA",
-      "prix": 13.0,
-      "valide_du": "2026-08-27T00:00:00-04:00",
       "valide_au": "2026-09-23T23:59:59-04:00",
       "familial": false
     },
