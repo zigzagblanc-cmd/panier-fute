@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panier futé — budget épicerie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,800;1,9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F1ECDF; --bg-elevated:#FFFDF7; --bg-sunken:#E7E0CD;
+    --text:#23261F; --text-muted:#6A6B5B;
+    --border:rgba(35,38,31,0.16); --border-strong:rgba(35,38,31,0.32);
+    --accent-red:#B23A26; --accent-red-bg:#B23A2618;
+    --accent-gold:#A9781F; --accent-gold-bg:#A9781F1c;
+    --accent-green:#43593C; --accent-green-bg:#43593C1a;
+    --accent-blue:#2E5C6E; --accent-blue-bg:#2E5C6E1a;
+    --shadow: 0 1px 2px rgba(35,38,31,0.06), 0 6px 16px rgba(35,38,31,0.07);
+    --radius: 10px;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#25282A; --bg-elevated:#2F3336; --bg-sunken:#1D2021;
+      --text:#EDE8DB; --text-muted:#A8A99B;
+      --border:rgba(237,232,219,0.14); --border-strong:rgba(237,232,219,0.28);
+      --accent-red:#E07456; --accent-red-bg:#E0745624;
+      --accent-gold:#E3B65A; --accent-gold-bg:#E3B65A24;
+      --accent-green:#8FB37F; --accent-green-bg:#8FB37F22;
+      --accent-blue:#7FB3C9; --accent-blue-bg:#7FB3C922;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 20px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#25282A; --bg-elevated:#2F3336; --bg-sunken:#1D2021;
+    --text:#EDE8DB; --text-muted:#A8A99B;
+    --border:rgba(237,232,219,0.14); --border-strong:rgba(237,232,219,0.28);
+    --accent-red:#E07456; --accent-red-bg:#E0745624;
+    --accent-gold:#E3B65A; --accent-gold-bg:#E3B65A24;
+    --accent-green:#8FB37F; --accent-green-bg:#8FB37F22;
+    --accent-blue:#7FB3C9; --accent-blue-bg:#7FB3C922;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 20px rgba(0,0,0,0.35);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg); color:var(--text); font-family:var(--font-body); -webkit-font-smoothing:antialiased; min-height:100vh;}
+  ::selection{background:var(--accent-gold-bg);}
+
+  .app{max-width:1180px; margin:0 auto; padding:0 20px 96px;}
+
+  .topbar{display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:28px 0 18px; border-bottom:1px solid var(--border); margin-bottom:22px;}
+  .brand{font-family:var(--font-display); font-weight:800; font-size:26px; letter-spacing:-0.01em;}
+  .brand em{font-style:italic; font-weight:600; color:var(--accent-red);}
+  .budget-pill{display:flex; align-items:center; gap:10px; font-size:13px; color:var(--text-muted);}
+  .budget-pill strong{color:var(--text); font-size:15px;}
+  .theme-toggle{border:1px solid var(--border-strong); background:var(--bg-elevated); color:var(--text); border-radius:999px; width:34px;height:34px; display:flex;align-items:center;justify-content:center; cursor:pointer; font-size:15px; flex-shrink:0;}
+
+  .layout{display:grid; grid-template-columns:172px 1fr; gap:28px; align-items:start;}
+  nav.tabs{position:sticky; top:20px; display:flex; flex-direction:column; gap:4px;}
+  nav.tabs button{all:unset; cursor:pointer; padding:10px 12px; border-radius:8px; font-size:14px; font-weight:500; color:var(--text-muted); display:flex; align-items:center; gap:10px;}
+  nav.tabs button .ico{font-size:16px; width:20px; text-align:center;}
+  nav.tabs button.active{background:var(--bg-elevated); color:var(--text); box-shadow:var(--shadow); font-weight:600;}
+  nav.tabs button:hover:not(.active){color:var(--text);}
+
+  main{min-width:0;}
+  .panel{display:none;}
+  .panel.active{display:block; animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;}}
+
+  h1.page-title{font-family:var(--font-display); font-weight:600; font-size:22px; margin:2px 0 4px;}
+  p.page-sub{color:var(--text-muted); font-size:14px; margin:0 0 22px; max-width:64ch;}
+
+  .card{background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; margin-bottom:16px;}
+  .card h2{font-family:var(--font-display); font-size:16px; font-weight:600; margin:0 0 4px;}
+  .card .hint{color:var(--text-muted); font-size:13px; margin:0 0 14px;}
+
+  .store-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:10px;}
+  .store-chip{position:relative; border:1px solid var(--border-strong); border-radius:8px; padding:12px 14px; display:flex; align-items:center; gap:10px; cursor:pointer; background:var(--bg-sunken); transition:border-color .15s, background .15s;}
+  .store-chip input{width:18px; height:18px; accent-color:var(--accent-green); cursor:pointer; flex-shrink:0;}
+  .store-chip span{font-size:14px; font-weight:500;}
+  .store-chip.checked{border-color:var(--accent-green); background:var(--accent-green-bg);}
+
+  label.field{display:block; margin-bottom:14px;}
+  label.field .lbl{display:block; font-size:13px; font-weight:600; margin-bottom:6px;}
+  label.field .lbl small{font-weight:400; color:var(--text-muted);}
+  input[type=text], input[type=number], input[type=search], select{
+    width:100%; padding:10px 12px; border:1px solid var(--border-strong); border-radius:8px;
+    background:var(--bg-sunken); color:var(--text); font-size:14px; font-family:var(--font-body);
+  }
+  input:focus, select:focus, button:focus-visible, .store-chip:focus-within{outline:2px solid var(--accent-gold); outline-offset:1px;}
+  .row{display:flex; gap:12px; flex-wrap:wrap;}
+  .row > *{flex:1; min-width:140px;}
+
+  .btn{all:unset; cursor:pointer; display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:8px; font-size:14px; font-weight:600; font-family:var(--font-body);}
+  .btn-primary{background:var(--accent-red); color:#fff;}
+  .btn-primary:hover{filter:brightness(1.06);}
+  .btn-ghost{background:var(--bg-sunken); color:var(--text); border:1px solid var(--border-strong);}
+  .btn-ghost:hover{border-color:var(--text-muted);}
+  .btn-sm{padding:6px 11px; font-size:12.5px;}
+  .btn:disabled{opacity:.45; cursor:not-allowed;}
+
+  .member-list{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;}
+  .member{background:var(--bg-sunken); border:1px solid var(--border); border-radius:999px; padding:6px 8px 6px 14px; font-size:13px; display:flex; align-items:center; gap:8px;}
+  .member button{all:unset; cursor:pointer; color:var(--text-muted); font-size:13px; line-height:1; width:18px;height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center;}
+  .member button:hover{background:var(--accent-red-bg); color:var(--accent-red);}
+
+  /* ---- recherche rabais ---- */
+  .search-wrap{position:relative;}
+  .search-wrap input{padding-left:38px; font-size:15px; padding-top:12px; padding-bottom:12px;}
+  .search-wrap .sico{position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:16px; opacity:.6; pointer-events:none;}
+  .sync-line{display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--text-muted); margin-top:10px;}
+  .sync-line button{all:unset; cursor:pointer; color:var(--accent-blue); font-weight:600; font-size:12px;}
+
+  .result-list{display:flex; flex-direction:column; gap:8px; margin-top:14px;}
+  .result-card{display:flex; align-items:center; gap:12px; padding:10px; border:1px solid var(--border); border-radius:8px; background:var(--bg-sunken);}
+  .thumb{width:44px; height:44px; border-radius:7px; background:var(--bg-elevated); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; overflow:hidden;}
+  .thumb img{width:100%; height:100%; object-fit:cover;}
+  .rc-main{flex:1; min-width:0;}
+  .rc-main .nom{font-weight:600; font-size:14px;}
+  .rc-main .magasin{font-size:12px; color:var(--text-muted);}
+  .rc-prix{font-size:14px; font-variant-numeric:tabular-nums; font-weight:600; white-space:nowrap;}
+  .fam-flag{display:flex; align-items:center; gap:5px; font-size:11px; color:var(--accent-gold); white-space:nowrap; cursor:pointer;}
+  .fam-flag input{accent-color:var(--accent-gold); cursor:pointer;}
+  .del-btn{all:unset; cursor:pointer; color:var(--text-muted); font-size:15px; padding:4px;}
+  .del-btn:hover{color:var(--accent-red);}
+  .empty{color:var(--text-muted); font-size:13.5px; padding:18px 0; text-align:center;}
+
+  .badge{display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:600; padding:3px 9px; border-radius:999px;}
+  .badge-fam{background:var(--accent-gold-bg); color:var(--accent-gold);}
+  .badge-list{background:var(--accent-blue-bg); color:var(--accent-blue);}
+  .badge-store{background:var(--bg-sunken); color:var(--text-muted); font-weight:500;}
+
+  .fam-banner{background:var(--accent-gold-bg); border:1px solid var(--accent-gold); border-radius:8px; padding:12px 14px; font-size:13.5px; margin-bottom:16px; display:flex; gap:10px; align-items:flex-start;}
+  .fam-banner .ico{font-size:17px;}
+  .meal-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(240px,1fr)); gap:14px;}
+  .meal-card{background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px; cursor:pointer; position:relative; transition:border-color .15s;}
+  .meal-card.checked{border-color:var(--accent-green); background:var(--accent-green-bg);}
+  .meal-card.suggested::before{content:"suggestion format familial"; position:absolute; top:-9px; left:14px; background:var(--accent-gold); color:#fff; font-size:10px; font-weight:700; padding:2px 8px; border-radius:999px;}
+  .meal-top{display:flex; justify-content:space-between; gap:10px; margin-bottom:8px;}
+  .meal-top input{width:20px;height:20px; accent-color:var(--accent-green); cursor:pointer; flex-shrink:0; margin-top:2px;}
+  .meal-name{font-family:var(--font-display); font-weight:600; font-size:16px; line-height:1.25;}
+  .meal-ing{font-size:12.5px; color:var(--text-muted); margin:6px 0 10px; line-height:1.5;}
+  .meal-tags{display:flex; gap:6px; flex-wrap:wrap;}
+
+  .store-group{margin-bottom:18px;}
+  .store-group h3{font-family:var(--font-display); font-size:15px; font-weight:600; margin:0 0 8px; display:flex; align-items:center; gap:8px;}
+  .list-item{display:flex; align-items:center; gap:12px; padding:9px 4px; border-bottom:1px solid var(--border);}
+  .list-item:last-child{border-bottom:none;}
+  .list-item input{width:20px;height:20px; accent-color:var(--accent-green); cursor:pointer; flex-shrink:0;}
+  .list-item .txt{flex:1; font-size:14px;}
+  .list-item.done .txt{text-decoration:line-through; color:var(--text-muted);}
+  .list-item .del2{all:unset; cursor:pointer; color:var(--text-muted); font-size:14px;}
+
+  .cost-bar-wrap{height:8px; border-radius:99px; background:var(--bg-sunken); overflow:hidden; margin:10px 0 6px;}
+  .cost-bar{height:100%; background:var(--accent-green); border-radius:99px; transition:width .3s ease;}
+  .cost-bar.over{background:var(--accent-red);}
+  .cost-line{display:flex; justify-content:space-between; font-size:13px; color:var(--text-muted);}
+  .cost-line strong{color:var(--text);}
+
+  .ratio-item{display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); font-size:13.5px;}
+  .ratio-item:last-child{border-bottom:none;}
+  .ratio-item .r-name{font-weight:600;}
+  .ratio-item .r-detail{color:var(--text-muted); font-size:12.5px;}
+
+  #toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--text); color:var(--bg); padding:10px 18px; border-radius:999px; font-size:13.5px; opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:50;}
+  #toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  .bottom-nav{display:none;}
+
+  @media (max-width: 780px){
+    .layout{grid-template-columns:1fr;}
+    nav.tabs{display:none;}
+    .app{padding:0 14px 90px;}
+    .bottom-nav{display:flex; position:fixed; left:0; right:0; bottom:0; background:var(--bg-elevated); border-top:1px solid var(--border); padding:6px 4px calc(6px + env(safe-area-inset-bottom)); justify-content:space-around; z-index:40; box-shadow:0 -4px 14px rgba(0,0,0,0.06);}
+    .bottom-nav button{all:unset; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:2px; font-size:10.5px; color:var(--text-muted); padding:6px 8px; border-radius:8px; flex:1;}
+    .bottom-nav button .ico{font-size:19px;}
+    .bottom-nav button.active{color:var(--accent-red); font-weight:600;}
+    .list-item{padding:12px 4px;}
+    .list-item input, .meal-top input{width:22px; height:22px;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand">Panier <em>futé</em></div>
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div class="budget-pill">Budget semaine <strong id="budgetPillVal">—</strong></div>
+      <button class="theme-toggle" id="themeToggle" title="Changer le thème" aria-label="Changer le thème">◐</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <nav class="tabs" aria-label="Sections">
+      <button data-tab="config" class="active"><span class="ico">⚙️</span> Réglages</button>
+      <button data-tab="rabais"><span class="ico">🔎</span> Rabais</button>
+      <button data-tab="repas"><span class="ico">🍲</span> Repas</button>
+      <button data-tab="liste"><span class="ico">🧺</span> Liste</button>
+      <button data-tab="appr"><span class="ico">📈</span> Portions</button>
+    </nav>
+
+    <main>
+
+      <!-- ================= CONFIGURATION / RÉGLAGES ================= -->
+      <section class="panel active" id="panel-config">
+        <h1 class="page-title">Réglages du ménage</h1>
+        <p class="page-sub">Tout se change ici en tout temps : magasins, budget, code postal, portions, membres. Rien n'active de notification — l'app ne fait quelque chose que lorsque vous l'ouvrez.</p>
+
+        <div class="card">
+          <h2>Magasins et sources à inclure</h2>
+          <p class="hint">Cochez uniquement ce que vous utilisez vraiment.</p>
+          <div class="store-grid" id="storeGrid"></div>
+        </div>
+
+        <div class="card">
+          <h2>Budget et localisation</h2>
+          <div class="row">
+            <label class="field"><span class="lbl">Budget épicerie <small>/ semaine</small></span><input type="number" id="inpBudget" min="0" step="5" placeholder="150"></label>
+            <label class="field"><span class="lbl">Code postal <small>circulaires locales</small></span><input type="text" id="inpPostal" placeholder="J2G 1A1" maxlength="7"></label>
+            <label class="field"><span class="lbl">Portions par repas</span><input type="number" id="inpPortions" min="1" step="1" placeholder="4"></label>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Membres du ménage</h2>
+          <div class="member-list" id="memberList"></div>
+          <div class="row" style="max-width:360px;">
+            <input type="text" id="inpMember" placeholder="Prénom">
+            <button class="btn btn-ghost btn-sm" id="btnAddMember" style="flex:0 0 auto;">Ajouter</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= RABAIS ================= -->
+      <section class="panel" id="panel-rabais">
+        <h1 class="page-title">Chercher un rabais</h1>
+        <p class="page-sub">Tapez un ingrédient — la recherche se fait en direct, pas besoin d'appuyer sur un bouton.</p>
+
+        <div class="card">
+          <div class="search-wrap">
+            <span class="sico">🔎</span>
+            <input type="search" id="searchRabais" placeholder="Ex. poulet, bœuf haché, pâtes…" autocomplete="off">
+          </div>
+          <div class="sync-line">
+            <span id="syncStatus">Chargement automatique : jamais tenté ici.</span>
+            <button id="btnManualCheck">Vérifier maintenant</button>
+          </div>
+          <div class="result-list" id="resultList"></div>
+        </div>
+
+        <div class="card">
+          <h2>Importer le fichier de la semaine</h2>
+          <p class="hint">Si l'app n'est pas hébergée à côté de <code>data/rabais.json</code>, importez-le manuellement ici — voir le script d'automatisation fourni.</p>
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <label class="btn btn-ghost" style="cursor:pointer;">
+              Choisir rabais.json
+              <input type="file" id="importFile" accept="application/json,.json" style="display:none;">
+            </label>
+            <span id="importStatus" class="hint" style="margin:0;"></span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Ajouter un rabais manuellement</h2>
+          <div class="row">
+            <label class="field" style="flex:2;"><span class="lbl">Ingrédient</span><input type="text" id="rIngredient" placeholder="Bœuf haché mi-maigre"></label>
+            <label class="field"><span class="lbl">Magasin</span><select id="rMagasin"></select></label>
+            <label class="field"><span class="lbl">Prix ($)</span><input type="number" id="rPrix" min="0" step="0.25" placeholder="7.99"></label>
+          </div>
+          <label style="display:flex; align-items:center; gap:8px; font-size:13.5px; margin-bottom:14px; cursor:pointer;">
+            <input type="checkbox" id="rFormatFamilial" style="width:17px;height:17px; accent-color:var(--accent-gold); cursor:pointer;">
+            Format familial avantageux
+          </label>
+          <button class="btn btn-primary" id="btnAddRabais">Ajouter</button>
+        </div>
+      </section>
+
+      <!-- ================= REPAS ================= -->
+      <section class="panel" id="panel-repas">
+        <h1 class="page-title">Repas suggérés</h1>
+        <p class="page-sub">Selon vos rabais actifs <em>et</em> ce que vous avez déjà ajouté à votre liste. Cochez ce que vous voulez faire cette semaine.</p>
+        <div id="famBannerZone"></div>
+        <div class="meal-grid" id="mealGrid"></div>
+      </section>
+
+      <!-- ================= LISTE ================= -->
+      <section class="panel" id="panel-liste">
+        <h1 class="page-title">Liste d'épicerie</h1>
+        <p class="page-sub">Groupée par magasin. Ajoutez un item à la main si besoin — il influencera aussi les suggestions de repas.</p>
+
+        <div class="card">
+          <h2>Suivi du budget</h2>
+          <div class="cost-line"><span>Estimé selon les prix saisis</span><strong id="costEstime">0,00 $</strong></div>
+          <div class="cost-bar-wrap"><div class="cost-bar" id="costBar" style="width:0%"></div></div>
+          <div class="cost-line"><span id="costMsg">Aucun repas sélectionné.</span><span id="costBudgetTxt"></span></div>
+        </div>
+
+        <div class="card">
+          <h2>Ajouter un item à la main</h2>
+          <div class="row" style="align-items:flex-end;">
+            <label class="field" style="margin:0;"><span class="lbl">Item</span><input type="text" id="inpManualItem" placeholder="Ex. papier essuie-tout"></label>
+            <button class="btn btn-ghost" id="btnAddManualItem" style="flex:0 0 auto;">Ajouter à la liste</button>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-bottom:16px;">
+          <button class="btn btn-ghost" id="btnCopyList">Copier la liste</button>
+          <button class="btn btn-ghost" id="btnResetChecks">Décocher tout</button>
+        </div>
+
+        <div id="listeZone"></div>
+      </section>
+
+      <!-- ================= APPRENTISSAGE ================= -->
+      <section class="panel" id="panel-appr">
+        <h1 class="page-title">Apprentissage des portions</h1>
+        <p class="page-sub">Dites-moi ce qu'une recette a vraiment donné, et j'ajuste les quantités suggérées la prochaine fois.</p>
+
+        <div class="card">
+          <h2>Enregistrer un résultat</h2>
+          <div class="row">
+            <label class="field" style="flex:2;"><span class="lbl">Recette</span><select id="aRecette"></select></label>
+            <label class="field"><span class="lbl">Quantité faite <small>× portion de base</small></span><input type="number" id="aMultiple" min="0.25" step="0.25" placeholder="1.5"></label>
+            <label class="field"><span class="lbl">Repas + lunchs obtenus</span><input type="number" id="aRepas" min="1" step="1" placeholder="7"></label>
+          </div>
+          <button class="btn btn-primary" id="btnAddRatio">Enregistrer ce ratio</button>
+        </div>
+
+        <div class="card"><h2>Ratios appris</h2><div id="ratioList"></div></div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<nav class="bottom-nav" aria-label="Sections">
+  <button data-tab="config" class="active"><span class="ico">⚙️</span>Réglages</button>
+  <button data-tab="rabais"><span class="ico">🔎</span>Rabais</button>
+  <button data-tab="repas"><span class="ico">🍲</span>Repas</button>
+  <button data-tab="liste"><span class="ico">🧺</span>Liste</button>
+  <button data-tab="appr"><span class="ico">📈</span>Portions</button>
+</nav>
+
+<div id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var STORAGE_KEY = "panierFute_v2";
+  var OLD_STORAGE_KEY = "panierFute_v1";
+  var state = null;
+
+  function loadState(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(raw) return JSON.parse(raw);
+      var old = localStorage.getItem(OLD_STORAGE_KEY);
+      if(old) return JSON.parse(old); // migration douce depuis la version précédente
+    }catch(e){}
+    return null;
+  }
+  function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
+
+  function defaultState(){
+    return {
+      theme: "auto",
+      stores: {
+        "IGA": true, "Maxi": true, "Metro": true, "Super C": true,
+        "Provigo": false, "Walmart": false, "Flashfood (anti-gaspi)": true,
+        "Glouton (recettes)": false, "Flipp / reebee (circulaires)": true
+      },
+      budget: 150, postal: "", portionsBase: 4, membres: ["Toi"],
+      rabais: [], mealChecked: {}, listChecked: {}, manualItems: [], ratios: [],
+      lastAutoSync: null
+    };
+  }
+
+  var RECETTES = [
+    {id:"pate-chinois", nom:"Pâté chinois", principal:"boeuf hache", ingredients:[{n:"Bœuf haché",q:500,u:"g"},{n:"Maïs en grains",q:1,u:"boîte"},{n:"Pommes de terre",q:800,u:"g"},{n:"Oignon",q:1,u:"unité"}]},
+    {id:"spag-viande", nom:"Spaghetti sauce à la viande", principal:"boeuf hache", ingredients:[{n:"Bœuf haché",q:400,u:"g"},{n:"Pâtes spaghetti",q:450,u:"g"},{n:"Sauce tomate",q:700,u:"ml"},{n:"Oignon",q:1,u:"unité"}]},
+    {id:"boulettes-bbq", nom:"Boulettes sauce BBQ", principal:"boeuf hache", ingredients:[{n:"Bœuf haché",q:500,u:"g"},{n:"Chapelure",q:60,u:"g"},{n:"Sauce BBQ",q:250,u:"ml"},{n:"Riz",q:300,u:"g"}]},
+    {id:"chili", nom:"Chili maison", principal:"boeuf hache", ingredients:[{n:"Bœuf haché",q:450,u:"g"},{n:"Haricots rouges",q:1,u:"boîte"},{n:"Tomates en dés",q:796,u:"ml"},{n:"Poivron",q:1,u:"unité"}]},
+    {id:"pain-viande", nom:"Pain de viande", principal:"boeuf hache", ingredients:[{n:"Bœuf haché",q:600,u:"g"},{n:"Chapelure",q:80,u:"g"},{n:"Œuf",q:1,u:"unité"},{n:"Ketchup",q:60,u:"ml"}]},
+    {id:"general-tao", nom:"Général Tao maison", principal:"poulet", ingredients:[{n:"Poulet",q:500,u:"g"},{n:"Riz",q:350,u:"g"},{n:"Fécule de maïs",q:40,u:"g"},{n:"Brocoli",q:1,u:"unité"}]},
+    {id:"soupe-poulet", nom:"Soupe-repas poulet et nouilles", principal:"poulet", ingredients:[{n:"Poulet",q:350,u:"g"},{n:"Nouilles",q:200,u:"g"},{n:"Carotte",q:2,u:"unité"},{n:"Bouillon de poulet",q:1,u:"L"}]},
+    {id:"riz-frit", nom:"Riz frit au poulet", principal:"poulet", ingredients:[{n:"Poulet",q:400,u:"g"},{n:"Riz",q:400,u:"g"},{n:"Œuf",q:2,u:"unité"},{n:"Petits pois",q:150,u:"g"}]},
+    {id:"pates-poulet-brocoli", nom:"Pâtes au poulet et brocoli", principal:"poulet", ingredients:[{n:"Poulet",q:400,u:"g"},{n:"Pâtes courtes",q:400,u:"g"},{n:"Brocoli",q:1,u:"unité"},{n:"Crème 15%",q:250,u:"ml"}]},
+    {id:"saute-tofu", nom:"Sauté de légumes et tofu", principal:"tofu", ingredients:[{n:"Tofu ferme",q:400,u:"g"},{n:"Légumes sautés (mélange)",q:500,u:"g"},{n:"Sauce soya",q:60,u:"ml"},{n:"Riz",q:300,u:"g"}]},
+    {id:"soupe-pois", nom:"Soupe aux pois", principal:"jambon", ingredients:[{n:"Jambon",q:250,u:"g"},{n:"Pois jaunes secs",q:400,u:"g"},{n:"Carotte",q:2,u:"unité"},{n:"Oignon",q:1,u:"unité"}]},
+    {id:"pates-rosee", nom:"Pâtes sauce rosée", principal:"pates", ingredients:[{n:"Pâtes courtes",q:450,u:"g"},{n:"Sauce tomate",q:500,u:"ml"},{n:"Crème 15%",q:200,u:"ml"},{n:"Parmesan",q:60,u:"g"}]}
+  ];
+
+  function norm(s){ return (s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim(); }
+  function uid(){ return Math.random().toString(36).slice(2,10); }
+  function money(n){ return (Math.round(n*100)/100).toLocaleString("fr-CA",{minimumFractionDigits:2,maximumFractionDigits:2}) + " $"; }
+  function toast(msg){
+    var t = document.getElementById("toast");
+    t.textContent = msg; t.classList.add("show");
+    clearTimeout(toast._h);
+    toast._h = setTimeout(function(){ t.classList.remove("show"); }, 2200);
+  }
+  function matches(a, b){
+    a = norm(a); b = norm(b);
+    if(!a || !b) return false;
+    return a.indexOf(b) !== -1 || b.indexOf(a) !== -1;
+  }
+  function debounce(fn, ms){
+    var t;
+    return function(){ var args = arguments, ctx = this; clearTimeout(t); t = setTimeout(function(){ fn.apply(ctx, args); }, ms); };
+  }
+
+  function recetteRatio(recetteId){
+    var found = null;
+    state.ratios.forEach(function(r){ if(r.recetteId === recetteId) found = r; });
+    return found;
+  }
+  function scaleFactorForRecette(recette){
+    var ratio = recetteRatio(recette.id);
+    var base = state.portionsBase || 4;
+    if(ratio && ratio.repas > 0 && ratio.multiple > 0){
+      var mealsPerMultiple = ratio.repas / ratio.multiple;
+      return base / mealsPerMultiple;
+    }
+    return base / 4;
+  }
+
+  /* ================= rendering ================= */
+  function render(){
+    renderTopbar(); renderStores(); renderConfigFields(); renderMembers();
+    renderMagasinSelect(); renderSearchResults(); renderMeals(); renderListe();
+    renderRecetteSelect(); renderRatios(); applyTheme(); renderSyncStatus();
+  }
+
+  function renderTopbar(){ document.getElementById("budgetPillVal").textContent = state.budget ? money(state.budget) : "—"; }
+
+  function renderStores(){
+    var grid = document.getElementById("storeGrid");
+    grid.innerHTML = "";
+    Object.keys(state.stores).forEach(function(name){
+      var checked = state.stores[name];
+      var chip = document.createElement("label");
+      chip.className = "store-chip" + (checked ? " checked" : "");
+      chip.innerHTML = '<input type="checkbox" ' + (checked?"checked":"") + '><span>' + name + '</span>';
+      chip.querySelector("input").addEventListener("change", function(e){
+        state.stores[name] = e.target.checked; saveState(); render();
+      });
+      grid.appendChild(chip);
+    });
+  }
+
+  function renderConfigFields(){
+    document.getElementById("inpBudget").value = state.budget || "";
+    document.getElementById("inpPostal").value = state.postal || "";
+    document.getElementById("inpPortions").value = state.portionsBase || "";
+  }
+
+  function renderMembers(){
+    var wrap = document.getElementById("memberList");
+    wrap.innerHTML = "";
+    state.membres.forEach(function(m, i){
+      var el = document.createElement("div");
+      el.className = "member";
+      el.innerHTML = '<span>' + m + '</span>';
+      var btn = document.createElement("button");
+      btn.textContent = "×"; btn.title = "Retirer";
+      btn.addEventListener("click", function(){ state.membres.splice(i,1); saveState(); render(); });
+      el.appendChild(btn); wrap.appendChild(el);
+    });
+  }
+
+  function activeStores(){ return Object.keys(state.stores).filter(function(s){ return state.stores[s]; }); }
+
+  function renderMagasinSelect(){
+    var sel = document.getElementById("rMagasin");
+    var current = sel.value; sel.innerHTML = "";
+    var stores = activeStores().filter(function(s){ return s.indexOf("(") === -1; });
+    if(stores.length === 0) stores = Object.keys(state.stores);
+    stores.forEach(function(s){ var o = document.createElement("option"); o.value = s; o.textContent = s; sel.appendChild(o); });
+    if(stores.indexOf(current) !== -1) sel.value = current;
+  }
+
+  function imageThumb(url){
+    if(!url) return '<div class="thumb">🛒</div>';
+    return '<div class="thumb"><img src="' + url + '" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\'🛒\'"></div>';
+  }
+
+  function renderResultCard(r){
+    var row = document.createElement("div");
+    row.className = "result-card";
+    row.innerHTML =
+      imageThumb(r.image) +
+      '<div class="rc-main"><div class="nom">' + r.ingredient + '</div><div class="magasin">' + r.magasin + '</div></div>' +
+      '<div class="rc-prix">' + (r.prix ? money(r.prix) : "—") + '</div>' +
+      '<label class="fam-flag"><input type="checkbox" ' + (r.familial?"checked":"") + '> familial</label>';
+    var famCb = row.querySelector(".fam-flag input");
+    famCb.addEventListener("change", function(){ r.familial = famCb.checked; saveState(); renderMeals(); renderListe(); });
+    var del = document.createElement("button");
+    del.className = "del-btn"; del.innerHTML = "🗑"; del.title = "Retirer";
+    del.addEventListener("click", function(){
+      state.rabais = state.rabais.filter(function(x){ return x.id !== r.id; });
+      saveState(); render();
+    });
+    row.appendChild(del);
+    return row;
+  }
+
+  function renderSearchResults(){
+    var wrap = document.getElementById("resultList");
+    var q = norm(document.getElementById("searchRabais").value);
+    wrap.innerHTML = "";
+    if(!q){
+      wrap.innerHTML = '<div class="empty">' + (state.rabais.length
+        ? ('Tapez pour chercher parmi vos ' + state.rabais.length + ' rabais actifs.')
+        : 'Aucun rabais chargé encore — importez le fichier de la semaine ci-dessous, ou ajoutez-en un à la main.') + '</div>';
+      return;
+    }
+    var found = state.rabais.filter(function(r){ return norm(r.ingredient).indexOf(q) !== -1; });
+    if(found.length === 0){ wrap.innerHTML = '<div class="empty">Aucun rabais ne correspond à « ' + document.getElementById("searchRabais").value + ' ».</div>'; return; }
+    found.forEach(function(r){ wrap.appendChild(renderResultCard(r)); });
+  }
+
+  function renderSyncStatus(){
+    var el = document.getElementById("syncStatus");
+    if(state.lastAutoSync){
+      var d = new Date(state.lastAutoSync);
+      el.textContent = "Dernier chargement automatique : " + d.toLocaleString("fr-CA");
+    } else {
+      el.textContent = "Chargement automatique : pas encore réussi ici (nécessite que l'app soit hébergée à côté de data/rabais.json — ex. GitHub Pages).";
+    }
+  }
+
+  function combinedIngredientPool(){
+    var pool = state.rabais.map(function(r){ return r.ingredient; });
+    state.manualItems.forEach(function(m){ pool.push(m.nom); });
+    return pool;
+  }
+
+  function suggestedRecetteIds(){
+    var famRabais = state.rabais.filter(function(r){ return r.familial; });
+    var ids = {};
+    famRabais.forEach(function(r){
+      RECETTES.filter(function(rec){ return rec.ingredients.some(function(ing){ return matches(r.ingredient, ing.n); }); })
+        .slice(0,3).forEach(function(rec){ ids[rec.id] = r.ingredient; });
+    });
+    return ids;
+  }
+
+  function renderMeals(){
+    var bannerZone = document.getElementById("famBannerZone");
+    var suggestions = suggestedRecetteIds();
+    var famNames = Array.from(new Set(Object.values(suggestions)));
+    bannerZone.innerHTML = "";
+    if(famNames.length){
+      var b = document.createElement("div");
+      b.className = "fam-banner";
+      b.innerHTML = '<span class="ico">🧡</span><div><strong>Format familial détecté :</strong> ' + famNames.join(", ") + '. Ces recettes sont mises de l\'avant pour l\'écouler.</div>';
+      bannerZone.appendChild(b);
+    }
+
+    var pool = combinedIngredientPool();
+    var manualNames = state.manualItems.map(function(m){ return m.nom; });
+
+    var relevant = RECETTES.filter(function(rec){
+      if(pool.length === 0) return true;
+      return rec.ingredients.some(function(ing){ return pool.some(function(p){ return matches(p, ing.n); }); }) || suggestions[rec.id];
+    });
+    relevant.sort(function(a,b){ return (suggestions[b.id]?1:0) - (suggestions[a.id]?1:0); });
+
+    var grid = document.getElementById("mealGrid");
+    grid.innerHTML = "";
+    if(relevant.length === 0){
+      grid.innerHTML = '<div class="empty">Aucune recette ne correspond encore — essayez un ingrédient plus courant (poulet, bœuf haché, pâtes…).</div>';
+      return;
+    }
+    relevant.forEach(function(rec){
+      var isSuggested = !!suggestions[rec.id];
+      var fromListOnly = !isSuggested && rec.ingredients.some(function(ing){ return manualNames.some(function(n){ return matches(n, ing.n); }); });
+      if(isSuggested && !(rec.id in state.mealChecked)) state.mealChecked[rec.id] = true;
+      var checked = !!state.mealChecked[rec.id];
+      var card = document.createElement("div");
+      card.className = "meal-card" + (checked?" checked":"") + (isSuggested?" suggested":"");
+      var ingLine = rec.ingredients.map(function(i){ return i.n; }).join(" · ");
+      card.innerHTML =
+        '<div class="meal-top"><div class="meal-name">' + rec.nom + '</div><input type="checkbox" ' + (checked?"checked":"") + '></div>' +
+        '<div class="meal-ing">' + ingLine + '</div>' +
+        '<div class="meal-tags"><span class="badge badge-store">' + (state.portionsBase||4) + ' portions</span>' +
+        (fromListOnly ? '<span class="badge badge-list">🧾 dans votre liste</span>' : '') + '</div>';
+      var cb = card.querySelector("input");
+      function toggle(){ state.mealChecked[rec.id] = !state.mealChecked[rec.id]; saveState(); render(); }
+      cb.addEventListener("click", function(e){ e.stopPropagation(); toggle(); });
+      card.addEventListener("click", toggle);
+      grid.appendChild(card);
+    });
+  }
+
+  function bestStoreForIngredient(name){
+    var match = null;
+    state.rabais.forEach(function(r){
+      if(matches(r.ingredient, name)){ if(!match || (r.prix && (!match.prix || r.prix < match.prix))) match = r; }
+    });
+    return match ? match.magasin : null;
+  }
+  function priceForIngredient(name){
+    var match = null;
+    state.rabais.forEach(function(r){ if(matches(r.ingredient, name) && r.prix){ if(!match || r.prix < match) match = r.prix; } });
+    return match;
+  }
+
+  function buildAggregatedList(){
+    var checkedIds = Object.keys(state.mealChecked).filter(function(k){ return state.mealChecked[k]; });
+    var recettes = RECETTES.filter(function(r){ return checkedIds.indexOf(r.id) !== -1; });
+    var byStore = {}; var totalCost = 0; var anyCost = false;
+    recettes.forEach(function(rec){
+      var factor = scaleFactorForRecette(rec);
+      rec.ingredients.forEach(function(ing){
+        var store = bestStoreForIngredient(ing.n) || "Magasin au choix (aucun rabais associé)";
+        var qty = Math.round(ing.q * factor * 10)/10;
+        byStore[store] = byStore[store] || {};
+        if(byStore[store][ing.n]) byStore[store][ing.n].q += qty;
+        else byStore[store][ing.n] = {q: qty, u: ing.u};
+        var p = priceForIngredient(ing.n);
+        if(p){ totalCost += p; anyCost = true; }
+      });
+    });
+    if(state.manualItems.length){
+      byStore["Ajoutés à la main"] = byStore["Ajoutés à la main"] || {};
+      state.manualItems.forEach(function(m){ byStore["Ajoutés à la main"][m.nom] = {q:"", u:""}; });
+    }
+    return {byStore: byStore, totalCost: totalCost, anyCost: anyCost, hasMeals: recettes.length > 0 || state.manualItems.length > 0};
+  }
+
+  function renderListe(){
+    var data = buildAggregatedList();
+    var zone = document.getElementById("listeZone");
+    zone.innerHTML = "";
+
+    var budget = state.budget || 0;
+    var pct = budget > 0 ? Math.min(100, (data.totalCost/budget)*100) : 0;
+    document.getElementById("costEstime").textContent = money(data.totalCost);
+    var bar = document.getElementById("costBar");
+    bar.style.width = pct + "%";
+    bar.classList.toggle("over", budget > 0 && data.totalCost > budget);
+    document.getElementById("costBudgetTxt").textContent = budget ? ("Budget : " + money(budget)) : "";
+    document.getElementById("costMsg").textContent = data.hasMeals
+      ? (data.anyCost ? "Basé sur les prix saisis dans Rabais (items sans prix non comptés)." : "Aucun prix saisi encore pour ces ingrédients.")
+      : "Aucun repas ni item sélectionné.";
+
+    var stores = Object.keys(data.byStore);
+    if(stores.length === 0){ zone.innerHTML = '<div class="empty">Cochez des repas dans l\'onglet Repas, ou ajoutez un item à la main.</div>'; return; }
+    stores.forEach(function(store){
+      var group = document.createElement("div");
+      group.className = "store-group";
+      var items = data.byStore[store];
+      group.innerHTML = '<h3>🛒 ' + store + '</h3>';
+      Object.keys(items).sort().forEach(function(name){
+        var it = items[name];
+        var key = store + "::" + name;
+        var done = !!state.listChecked[key];
+        var row = document.createElement("div");
+        row.className = "list-item" + (done ? " done" : "");
+        var qtyTxt = it.q !== "" ? (' — ' + it.q + ' ' + it.u) : '';
+        row.innerHTML = '<input type="checkbox" ' + (done?"checked":"") + '><span class="txt">' + name + qtyTxt + '</span>';
+        var cb = row.querySelector("input");
+        cb.addEventListener("change", function(){ state.listChecked[key] = cb.checked; saveState(); row.classList.toggle("done", cb.checked); });
+        if(store === "Ajoutés à la main"){
+          var del2 = document.createElement("button");
+          del2.className = "del2"; del2.textContent = "🗑";
+          del2.addEventListener("click", function(){
+            state.manualItems = state.manualItems.filter(function(m){ return m.nom !== name; });
+            saveState(); render();
+          });
+          row.appendChild(del2);
+        }
+        group.appendChild(row);
+      });
+      zone.appendChild(group);
+    });
+  }
+
+  function renderRecetteSelect(){
+    var sel = document.getElementById("aRecette");
+    var current = sel.value; sel.innerHTML = "";
+    RECETTES.forEach(function(r){ var o = document.createElement("option"); o.value = r.id; o.textContent = r.nom; sel.appendChild(o); });
+    if(current) sel.value = current;
+  }
+
+  function renderRatios(){
+    var wrap = document.getElementById("ratioList");
+    if(state.ratios.length === 0){ wrap.innerHTML = '<div class="empty">Aucun ratio enregistré encore.</div>'; return; }
+    wrap.innerHTML = "";
+    state.ratios.slice().reverse().forEach(function(r, revIdx){
+      var idx = state.ratios.length - 1 - revIdx;
+      var rec = RECETTES.find(function(x){ return x.id === r.recetteId; });
+      var row = document.createElement("div");
+      row.className = "ratio-item";
+      row.innerHTML = '<div><div class="r-name">' + (rec?rec.nom:r.recetteId) + '</div><div class="r-detail">' + r.multiple + '× la recette de base → ' + r.repas + ' repas/lunchs</div></div>';
+      var del = document.createElement("button");
+      del.className = "del-btn"; del.innerHTML = "🗑";
+      del.addEventListener("click", function(){ state.ratios.splice(idx,1); saveState(); render(); });
+      row.appendChild(del); wrap.appendChild(row);
+    });
+  }
+
+  function applyTheme(){
+    if(state.theme === "light") document.documentElement.setAttribute("data-theme","light");
+    else if(state.theme === "dark") document.documentElement.setAttribute("data-theme","dark");
+    else document.documentElement.removeAttribute("data-theme");
+    document.getElementById("themeToggle").textContent = state.theme === "dark" ? "☾" : (state.theme === "light" ? "☀" : "◐");
+  }
+
+  function setTab(name){
+    document.querySelectorAll(".panel").forEach(function(p){ p.classList.remove("active"); });
+    document.getElementById("panel-" + name).classList.add("active");
+    document.querySelectorAll("nav.tabs button, .bottom-nav button").forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-tab") === name); });
+    window.scrollTo({top:0, behavior:"instant"});
+  }
+  document.querySelectorAll("nav.tabs button, .bottom-nav button").forEach(function(btn){
+    btn.addEventListener("click", function(){ setTab(btn.getAttribute("data-tab")); });
+  });
+
+  /* ================= import / auto-fetch ================= */
+  function applyImportedRabais(parsed, sourceLabel){
+    var list = parsed && parsed.rabais;
+    if(!Array.isArray(list)) return false;
+    var imported = list.map(function(item){
+      return {
+        id: uid(),
+        ingredient: item.ingredient || item.name || "Item sans nom",
+        magasin: item.magasin || item.merchant || "Magasin au choix (aucun rabais associé)",
+        prix: (typeof item.prix === "number") ? item.prix : (parseFloat(item.prix) || null),
+        familial: !!item.familial,
+        image: item.image || item.image_url || null
+      };
+    }).filter(function(r){ return r.ingredient; });
+    if(imported.length === 0) return false;
+    state.rabais = imported;
+    saveState();
+    return imported.length;
+  }
+
+  document.getElementById("importFile").addEventListener("change", function(e){
+    var file = e.target.files[0];
+    var statusEl = document.getElementById("importStatus");
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(evt){
+      var parsed;
+      try{ parsed = JSON.parse(evt.target.result); }
+      catch(err){ statusEl.textContent = "Fichier invalide — ce n'est pas du JSON lisible."; return; }
+      var count = applyImportedRabais(parsed);
+      if(!count){ statusEl.textContent = "Fichier reconnu mais aucun rabais exploitable trouvé."; return; }
+      render();
+      statusEl.textContent = count + " rabais importés" + (parsed.code_postal ? (" pour " + parsed.code_postal) : "") + ".";
+      toast(count + " rabais importés.");
+      document.getElementById("searchRabais").value = "";
+      setTab("rabais");
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  });
+
+  function tryAutoFetch(silent){
+    return fetch("data/rabais.json", {cache:"no-store"})
+      .then(function(resp){ if(!resp.ok) throw new Error("not ok"); return resp.json(); })
+      .then(function(parsed){
+        var count = applyImportedRabais(parsed);
+        if(count){
+          state.lastAutoSync = new Date().toISOString();
+          saveState(); render();
+          if(!silent) toast(count + " rabais chargés automatiquement.");
+        } else if(!silent){
+          toast("Fichier trouvé mais vide ou illisible.");
+        }
+      })
+      .catch(function(){
+        // Échec attendu quand l'app n'est pas hébergée à côté du fichier
+        // (ex. ici, dans l'artefact Claude) — l'import manuel reste disponible.
+        if(!silent) toast("Chargement automatique impossible ici — utilisez l'import manuel ci-dessous.");
+      });
+  }
+  document.getElementById("btnManualCheck").addEventListener("click", function(){ tryAutoFetch(false); });
+
+  var searchInput = document.getElementById("searchRabais");
+  searchInput.addEventListener("input", debounce(renderSearchResults, 120));
+
+  document.getElementById("inpBudget").addEventListener("input", function(e){ state.budget = parseFloat(e.target.value) || 0; saveState(); renderTopbar(); renderListe(); });
+  document.getElementById("inpPostal").addEventListener("input", function(e){ state.postal = e.target.value; saveState(); });
+  document.getElementById("inpPortions").addEventListener("input", function(e){ state.portionsBase = parseInt(e.target.value) || 4; saveState(); renderMeals(); renderListe(); });
+  document.getElementById("btnAddMember").addEventListener("click", function(){
+    var inp = document.getElementById("inpMember"); var v = inp.value.trim();
+    if(!v) return; state.membres.push(v); inp.value = ""; saveState(); render();
+  });
+  document.getElementById("inpMember").addEventListener("keydown", function(e){ if(e.key === "Enter") document.getElementById("btnAddMember").click(); });
+
+  document.getElementById("btnAddRabais").addEventListener("click", function(){
+    var ing = document.getElementById("rIngredient").value.trim();
+    var mag = document.getElementById("rMagasin").value;
+    var prix = parseFloat(document.getElementById("rPrix").value);
+    var fam = document.getElementById("rFormatFamilial").checked;
+    if(!ing){ toast("Entrez un nom d'ingrédient."); return; }
+    state.rabais.push({id:uid(), ingredient:ing, magasin:mag||"Magasin au choix (aucun rabais associé)", prix: isNaN(prix)?null:prix, familial: fam, image:null});
+    document.getElementById("rIngredient").value = ""; document.getElementById("rPrix").value = "";
+    document.getElementById("rFormatFamilial").checked = false;
+    saveState(); render(); toast("Rabais ajouté.");
+  });
+
+  document.getElementById("btnAddManualItem").addEventListener("click", function(){
+    var inp = document.getElementById("inpManualItem"); var v = inp.value.trim();
+    if(!v) return;
+    state.manualItems.push({id:uid(), nom:v});
+    inp.value = ""; saveState(); render(); toast("Item ajouté à la liste.");
+  });
+  document.getElementById("inpManualItem").addEventListener("keydown", function(e){ if(e.key === "Enter") document.getElementById("btnAddManualItem").click(); });
+
+  document.getElementById("btnAddRatio").addEventListener("click", function(){
+    var recetteId = document.getElementById("aRecette").value;
+    var multiple = parseFloat(document.getElementById("aMultiple").value);
+    var repas = parseInt(document.getElementById("aRepas").value);
+    if(!multiple || !repas){ toast("Remplissez la quantité et le nombre de repas obtenus."); return; }
+    state.ratios.push({recetteId: recetteId, multiple: multiple, repas: repas});
+    document.getElementById("aMultiple").value = ""; document.getElementById("aRepas").value = "";
+    saveState(); render(); toast("Ratio enregistré.");
+  });
+
+  document.getElementById("btnCopyList").addEventListener("click", function(){
+    var data = buildAggregatedList();
+    var lines = [];
+    Object.keys(data.byStore).forEach(function(store){
+      lines.push(store.toUpperCase());
+      Object.keys(data.byStore[store]).sort().forEach(function(name){
+        var it = data.byStore[store][name];
+        lines.push("- " + name + (it.q !== "" ? (" — " + it.q + " " + it.u) : ""));
+      });
+      lines.push("");
+    });
+    var text = lines.join("\n").trim();
+    if(!text){ toast("Rien à copier."); return; }
+    try{ navigator.clipboard.writeText(text).then(function(){ toast("Liste copiée !"); }).catch(function(){ fallbackCopy(text); }); }
+    catch(e){ fallbackCopy(text); }
+  });
+  function fallbackCopy(text){
+    try{
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); document.body.removeChild(ta);
+      toast("Liste copiée !");
+    }catch(e){ toast("Impossible de copier automatiquement."); }
+  }
+
+  document.getElementById("btnResetChecks").addEventListener("click", function(){ state.listChecked = {}; saveState(); renderListe(); toast("Cases décochées."); });
+
+  document.getElementById("themeToggle").addEventListener("click", function(){
+    state.theme = state.theme === "auto" ? "dark" : (state.theme === "dark" ? "light" : "auto");
+    saveState(); applyTheme();
+  });
+
+  /* ================= init ================= */
+  state = loadState() || defaultState();
+  var d = defaultState();
+  Object.keys(d).forEach(function(k){ if(!(k in state)) state[k] = d[k]; });
+  render();
+  tryAutoFetch(true); // tentative silencieuse au démarrage — ne fonctionne que si l'app est hébergée à côté du fichier
+
+})();
+</script>
+</body>
+</html>
