@@ -43,17 +43,19 @@
     --accent-blue:#7FB3C9; --accent-blue-bg:#7FB3C922;
     --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 20px rgba(0,0,0,0.35);
   }
-
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{background:var(--bg); color:var(--text); font-family:var(--font-body); -webkit-font-smoothing:antialiased; min-height:100vh;}
   ::selection{background:var(--accent-gold-bg);}
-
   .app{max-width:1180px; margin:0 auto; padding:0 20px 96px;}
 
-  .topbar{display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:28px 0 18px; border-bottom:1px solid var(--border); margin-bottom:22px;}
-  .brand{font-family:var(--font-display); font-weight:800; font-size:26px; letter-spacing:-0.01em;}
+  .topbar{display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:24px 0 16px; border-bottom:1px solid var(--border); margin-bottom:22px;}
+  .brand{font-family:var(--font-display); font-weight:800; font-size:24px; letter-spacing:-0.01em;}
   .brand em{font-style:italic; font-weight:600; color:var(--accent-red);}
+  .topbar-right{display:flex; align-items:center; gap:14px;}
+  .who{font-size:12.5px; color:var(--text-muted); text-align:right; line-height:1.3;}
+  .who strong{color:var(--text); font-size:13.5px;}
+  .who a{color:var(--accent-blue); cursor:pointer; text-decoration:none;}
   .budget-pill{display:flex; align-items:center; gap:10px; font-size:13px; color:var(--text-muted);}
   .budget-pill strong{color:var(--text); font-size:15px;}
   .theme-toggle{border:1px solid var(--border-strong); background:var(--bg-elevated); color:var(--text); border-radius:999px; width:34px;height:34px; display:flex;align-items:center;justify-content:center; cursor:pointer; font-size:15px; flex-shrink:0;}
@@ -71,7 +73,8 @@
   @keyframes fade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;}}
 
   h1.page-title{font-family:var(--font-display); font-weight:600; font-size:22px; margin:2px 0 4px;}
-  p.page-sub{color:var(--text-muted); font-size:14px; margin:0 0 22px; max-width:64ch;}
+  p.page-sub{color:var(--text-muted); font-size:14px; margin:0 0 20px; max-width:66ch;}
+  .talk{font-family:var(--font-display); font-size:17px; margin:0 0 16px; line-height:1.4;}
 
   .card{background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; margin-bottom:16px;}
   .card h2{font-family:var(--font-display); font-size:16px; font-weight:600; margin:0 0 4px;}
@@ -103,25 +106,26 @@
   .btn:disabled{opacity:.45; cursor:not-allowed;}
 
   .member-list{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;}
-  .member{background:var(--bg-sunken); border:1px solid var(--border); border-radius:999px; padding:6px 8px 6px 14px; font-size:13px; display:flex; align-items:center; gap:8px;}
+  .member{background:var(--bg-sunken); border:1px solid var(--border); border-radius:999px; padding:6px 8px 6px 14px; font-size:13px; display:flex; align-items:center; gap:8px; cursor:pointer;}
+  .member.active{border-color:var(--accent-green); background:var(--accent-green-bg); font-weight:600;}
   .member button{all:unset; cursor:pointer; color:var(--text-muted); font-size:13px; line-height:1; width:18px;height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center;}
   .member button:hover{background:var(--accent-red-bg); color:var(--accent-red);}
 
-  /* ---- recherche rabais ---- */
   .search-wrap{position:relative;}
   .search-wrap input{padding-left:38px; font-size:15px; padding-top:12px; padding-bottom:12px;}
   .search-wrap .sico{position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:16px; opacity:.6; pointer-events:none;}
-  .sync-line{display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--text-muted); margin-top:10px;}
+  .sync-line{display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--text-muted); margin-top:10px; flex-wrap:wrap; gap:6px;}
   .sync-line button{all:unset; cursor:pointer; color:var(--accent-blue); font-weight:600; font-size:12px;}
 
   .result-list{display:flex; flex-direction:column; gap:8px; margin-top:14px;}
   .result-card{display:flex; align-items:center; gap:12px; padding:10px; border:1px solid var(--border); border-radius:8px; background:var(--bg-sunken);}
-  .thumb{width:44px; height:44px; border-radius:7px; background:var(--bg-elevated); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; overflow:hidden;}
+  .thumb{width:40px; height:40px; border-radius:7px; background:var(--bg-elevated); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0; overflow:hidden;}
   .thumb img{width:100%; height:100%; object-fit:cover;}
   .rc-main{flex:1; min-width:0;}
   .rc-main .nom{font-weight:600; font-size:14px;}
   .rc-main .magasin{font-size:12px; color:var(--text-muted);}
   .rc-prix{font-size:14px; font-variant-numeric:tabular-nums; font-weight:600; white-space:nowrap;}
+  .rc-add{all:unset; cursor:pointer; background:var(--accent-green); color:#fff; border-radius:6px; padding:5px 10px; font-size:12px; font-weight:600;}
   .fam-flag{display:flex; align-items:center; gap:5px; font-size:11px; color:var(--accent-gold); white-space:nowrap; cursor:pointer;}
   .fam-flag input{accent-color:var(--accent-gold); cursor:pointer;}
   .del-btn{all:unset; cursor:pointer; color:var(--text-muted); font-size:15px; padding:4px;}
@@ -132,27 +136,45 @@
   .badge-fam{background:var(--accent-gold-bg); color:var(--accent-gold);}
   .badge-list{background:var(--accent-blue-bg); color:var(--accent-blue);}
   .badge-store{background:var(--bg-sunken); color:var(--text-muted); font-weight:500;}
+  .badge-onsale{background:var(--accent-green-bg); color:var(--accent-green);}
+  .badge-warn{background:var(--accent-red-bg); color:var(--accent-red); cursor:pointer;}
 
   .fam-banner{background:var(--accent-gold-bg); border:1px solid var(--accent-gold); border-radius:8px; padding:12px 14px; font-size:13.5px; margin-bottom:16px; display:flex; gap:10px; align-items:flex-start;}
-  .fam-banner .ico{font-size:17px;}
-  .meal-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(240px,1fr)); gap:14px;}
+  .sugg-banner{background:var(--accent-blue-bg); border:1px solid var(--accent-blue); border-radius:8px; padding:14px; margin-bottom:16px;}
+  .sugg-banner h3{margin:0 0 8px; font-family:var(--font-display); font-size:14.5px;}
+  .sugg-row{display:flex; gap:8px; flex-wrap:wrap;}
+  .sugg-chip{background:var(--bg-elevated); border:1px solid var(--border-strong); border-radius:999px; padding:6px 12px; font-size:12.5px; cursor:pointer;}
+  .sugg-chip:hover{border-color:var(--accent-blue);}
+
+  .meal-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(250px,1fr)); gap:14px;}
   .meal-card{background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px; cursor:pointer; position:relative; transition:border-color .15s;}
   .meal-card.checked{border-color:var(--accent-green); background:var(--accent-green-bg);}
   .meal-card.suggested::before{content:"suggestion format familial"; position:absolute; top:-9px; left:14px; background:var(--accent-gold); color:#fff; font-size:10px; font-weight:700; padding:2px 8px; border-radius:999px;}
   .meal-top{display:flex; justify-content:space-between; gap:10px; margin-bottom:8px;}
   .meal-top input{width:20px;height:20px; accent-color:var(--accent-green); cursor:pointer; flex-shrink:0; margin-top:2px;}
   .meal-name{font-family:var(--font-display); font-weight:600; font-size:16px; line-height:1.25;}
-  .meal-ing{font-size:12.5px; color:var(--text-muted); margin:6px 0 10px; line-height:1.5;}
+  .meal-ing{font-size:12.5px; color:var(--text-muted); margin:6px 0 10px; line-height:1.6;}
+  .meal-ing .on-sale{color:var(--accent-green); font-weight:600;}
   .meal-tags{display:flex; gap:6px; flex-wrap:wrap;}
+  .meal-del{position:absolute; top:8px; right:8px; all:unset; cursor:pointer; color:var(--text-muted); font-size:13px; padding:4px;}
+
+  .refine-box{margin-top:10px; padding-top:10px; border-top:1px dashed var(--border-strong);}
+  .refine-list{display:flex; flex-direction:column; gap:6px; margin-bottom:8px;}
+  .refine-item{display:flex; justify-content:space-between; align-items:center; font-size:12.5px; background:var(--bg-sunken); border-radius:6px; padding:5px 8px;}
+  .refine-suggest{display:flex; flex-direction:column; gap:4px; margin-top:4px; max-height:140px; overflow-y:auto;}
+  .refine-suggest button{all:unset; cursor:pointer; font-size:12.5px; padding:6px 8px; border-radius:6px; background:var(--bg-sunken);}
+  .refine-suggest button:hover{background:var(--accent-green-bg);}
 
   .store-group{margin-bottom:18px;}
   .store-group h3{font-family:var(--font-display); font-size:15px; font-weight:600; margin:0 0 8px; display:flex; align-items:center; gap:8px;}
-  .list-item{display:flex; align-items:center; gap:12px; padding:9px 4px; border-bottom:1px solid var(--border);}
+  .list-item{display:flex; align-items:center; gap:10px; padding:9px 4px; border-bottom:1px solid var(--border); flex-wrap:wrap;}
   .list-item:last-child{border-bottom:none;}
-  .list-item input{width:20px;height:20px; accent-color:var(--accent-green); cursor:pointer; flex-shrink:0;}
-  .list-item .txt{flex:1; font-size:14px;}
+  .list-item input[type=checkbox]{width:20px;height:20px; accent-color:var(--accent-green); cursor:pointer; flex-shrink:0;}
+  .list-item .txt{flex:1; font-size:14px; min-width:120px;}
   .list-item.done .txt{text-decoration:line-through; color:var(--text-muted);}
   .list-item .del2{all:unset; cursor:pointer; color:var(--text-muted); font-size:14px;}
+  .compare-box{width:100%; margin-top:8px; background:var(--accent-red-bg); border:1px solid var(--accent-red); border-radius:8px; padding:10px 12px; font-size:12.5px;}
+  .compare-box .use-btn{all:unset; cursor:pointer; color:var(--accent-green); font-weight:700; margin-top:6px; display:inline-block;}
 
   .cost-bar-wrap{height:8px; border-radius:99px; background:var(--bg-sunken); overflow:hidden; margin:10px 0 6px;}
   .cost-bar{height:100%; background:var(--accent-green); border-radius:99px; transition:width .3s ease;}
@@ -165,11 +187,17 @@
   .ratio-item .r-name{font-weight:600;}
   .ratio-item .r-detail{color:var(--text-muted); font-size:12.5px;}
 
-  #toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--text); color:var(--bg); padding:10px 18px; border-radius:999px; font-size:13.5px; opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:50;}
+  #toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--text); color:var(--bg); padding:10px 18px; border-radius:999px; font-size:13.5px; opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:50; max-width:88vw; text-align:center;}
   #toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
 
-  .bottom-nav{display:none;}
+  /* onboarding overlay */
+  #onboard{position:fixed; inset:0; background:var(--bg); z-index:100; display:flex; align-items:center; justify-content:center; padding:24px;}
+  #onboard .box{max-width:420px; width:100%; text-align:center;}
+  #onboard h1{font-family:var(--font-display); font-size:26px; margin-bottom:18px;}
+  #onboard input, #onboard select{text-align:center; font-size:16px; padding:12px;}
+  #onboard .btn{margin-top:16px; width:100%; justify-content:center;}
 
+  .bottom-nav{display:none;}
   @media (max-width: 780px){
     .layout{grid-template-columns:1fr;}
     nav.tabs{display:none;}
@@ -179,71 +207,51 @@
     .bottom-nav button .ico{font-size:19px;}
     .bottom-nav button.active{color:var(--accent-red); font-weight:600;}
     .list-item{padding:12px 4px;}
-    .list-item input, .meal-top input{width:22px; height:22px;}
+    .list-item input[type=checkbox], .meal-top input{width:22px; height:22px;}
+    .topbar{flex-wrap:wrap; gap:10px;}
   }
 </style>
 </head>
 <body>
+
+<div id="onboard" style="display:none;">
+  <div class="box">
+    <h1 id="onboardQuestion">Salut ! Comment tu t'appelles ?</h1>
+    <input type="text" id="onboardInput" placeholder="Ton prénom" style="display:block; width:100%;">
+    <select id="onboardSelect" style="display:none; width:100%;"></select>
+    <button class="btn btn-primary" id="onboardNext">Continuer</button>
+  </div>
+</div>
+
 <div class="app">
 
   <div class="topbar">
     <div class="brand">Panier <em>futé</em></div>
-    <div style="display:flex; align-items:center; gap:14px;">
-      <div class="budget-pill">Budget semaine <strong id="budgetPillVal">—</strong></div>
+    <div class="topbar-right">
+      <div class="who"><strong id="whoName">—</strong><br><a id="switchUser">changer d'utilisateur</a></div>
+      <div class="budget-pill">Budget <strong id="budgetPillVal">—</strong></div>
       <button class="theme-toggle" id="themeToggle" title="Changer le thème" aria-label="Changer le thème">◐</button>
     </div>
   </div>
 
   <div class="layout">
     <nav class="tabs" aria-label="Sections">
-      <button data-tab="config" class="active"><span class="ico">⚙️</span> Réglages</button>
-      <button data-tab="rabais"><span class="ico">🔎</span> Rabais</button>
+      <button data-tab="liste" class="active"><span class="ico">🧺</span> Liste</button>
       <button data-tab="repas"><span class="ico">🍲</span> Repas</button>
-      <button data-tab="liste"><span class="ico">🧺</span> Liste</button>
       <button data-tab="appr"><span class="ico">📈</span> Portions</button>
+      <button data-tab="maj"><span class="ico">🔄</span> Mise à jour</button>
     </nav>
 
     <main>
 
-      <!-- ================= CONFIGURATION / RÉGLAGES ================= -->
-      <section class="panel active" id="panel-config">
-        <h1 class="page-title">Réglages du ménage</h1>
-        <p class="page-sub">Tout se change ici en tout temps : magasins, budget, code postal, portions, membres. Rien n'active de notification — l'app ne fait quelque chose que lorsque vous l'ouvrez.</p>
-
-        <div class="card">
-          <h2>Magasins et sources à inclure</h2>
-          <p class="hint">Cochez uniquement ce que vous utilisez vraiment.</p>
-          <div class="store-grid" id="storeGrid"></div>
-        </div>
-
-        <div class="card">
-          <h2>Budget et localisation</h2>
-          <div class="row">
-            <label class="field"><span class="lbl">Budget épicerie <small>/ semaine</small></span><input type="number" id="inpBudget" min="0" step="5" placeholder="150"></label>
-            <label class="field"><span class="lbl">Code postal <small>circulaires locales</small></span><input type="text" id="inpPostal" placeholder="J2G 1A1" maxlength="7"></label>
-            <label class="field"><span class="lbl">Portions par repas</span><input type="number" id="inpPortions" min="1" step="1" placeholder="4"></label>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2>Membres du ménage</h2>
-          <div class="member-list" id="memberList"></div>
-          <div class="row" style="max-width:360px;">
-            <input type="text" id="inpMember" placeholder="Prénom">
-            <button class="btn btn-ghost btn-sm" id="btnAddMember" style="flex:0 0 auto;">Ajouter</button>
-          </div>
-        </div>
-      </section>
-
-      <!-- ================= RABAIS ================= -->
-      <section class="panel" id="panel-rabais">
-        <h1 class="page-title">Chercher un rabais</h1>
-        <p class="page-sub">Tapez un ingrédient — la recherche se fait en direct, pas besoin d'appuyer sur un bouton.</p>
+      <!-- ================= LISTE + RABAIS (fusion) ================= -->
+      <section class="panel active" id="panel-liste">
+        <p class="talk" id="talkListe">Voici ta liste — cherche un rabais ci-dessous pour l'ajouter directement.</p>
 
         <div class="card">
           <div class="search-wrap">
             <span class="sico">🔎</span>
-            <input type="search" id="searchRabais" placeholder="Ex. poulet, bœuf haché, pâtes…" autocomplete="off">
+            <input type="search" id="searchRabais" placeholder="Ex. poulet, papier toilette, pates…" autocomplete="off">
           </div>
           <div class="sync-line">
             <span id="syncStatus">Chargement automatique : jamais tenté ici.</span>
@@ -253,19 +261,30 @@
         </div>
 
         <div class="card">
-          <h2>Importer le fichier de la semaine</h2>
-          <p class="hint">Si l'app n'est pas hébergée à côté de <code>data/rabais.json</code>, importez-le manuellement ici — voir le script d'automatisation fourni.</p>
-          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-            <label class="btn btn-ghost" style="cursor:pointer;">
-              Choisir rabais.json
-              <input type="file" id="importFile" accept="application/json,.json" style="display:none;">
-            </label>
-            <span id="importStatus" class="hint" style="margin:0;"></span>
-          </div>
+          <h2>Suivi du budget</h2>
+          <div class="cost-line"><span>Estimé selon les prix connus</span><strong id="costEstime">0,00 $</strong></div>
+          <div class="cost-bar-wrap"><div class="cost-bar" id="costBar" style="width:0%"></div></div>
+          <div class="cost-line"><span id="costMsg">Aucun repas sélectionné.</span><span id="costBudgetTxt"></span></div>
         </div>
 
         <div class="card">
+          <h2>Ajouter un item à la main</h2>
+          <div class="row" style="align-items:flex-end;">
+            <label class="field" style="margin:0;"><span class="lbl">Item</span><input type="text" id="inpManualItem" placeholder="Ex. papier essuie-tout"></label>
+            <button class="btn btn-ghost" id="btnAddManualItem" style="flex:0 0 auto;">Ajouter</button>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-bottom:16px;">
+          <button class="btn btn-ghost" id="btnCopyList">Copier la liste</button>
+          <button class="btn btn-ghost" id="btnResetChecks">Décocher tout</button>
+        </div>
+
+        <div id="listeZone"></div>
+
+        <div class="card" style="margin-top:20px;">
           <h2>Ajouter un rabais manuellement</h2>
+          <p class="hint">Pour un spécial en magasin, un coupon, ou si l'automatisation a manqué quelque chose.</p>
           <div class="row">
             <label class="field" style="flex:2;"><span class="lbl">Ingrédient</span><input type="text" id="rIngredient" placeholder="Bœuf haché mi-maigre"></label>
             <label class="field"><span class="lbl">Magasin</span><select id="rMagasin"></select></label>
@@ -281,45 +300,25 @@
 
       <!-- ================= REPAS ================= -->
       <section class="panel" id="panel-repas">
-        <h1 class="page-title">Repas suggérés</h1>
-        <p class="page-sub">Selon vos rabais actifs <em>et</em> ce que vous avez déjà ajouté à votre liste. Cochez ce que vous voulez faire cette semaine.</p>
+        <p class="talk" id="talkRepas">Voici ce que je te propose cette semaine.</p>
+        <div id="suggBannerZone"></div>
         <div id="famBannerZone"></div>
-        <div class="meal-grid" id="mealGrid"></div>
-      </section>
-
-      <!-- ================= LISTE ================= -->
-      <section class="panel" id="panel-liste">
-        <h1 class="page-title">Liste d'épicerie</h1>
-        <p class="page-sub">Groupée par magasin. Ajoutez un item à la main si besoin — il influencera aussi les suggestions de repas.</p>
 
         <div class="card">
-          <h2>Suivi du budget</h2>
-          <div class="cost-line"><span>Estimé selon les prix saisis</span><strong id="costEstime">0,00 $</strong></div>
-          <div class="cost-bar-wrap"><div class="cost-bar" id="costBar" style="width:0%"></div></div>
-          <div class="cost-line"><span id="costMsg">Aucun repas sélectionné.</span><span id="costBudgetTxt"></span></div>
-        </div>
-
-        <div class="card">
-          <h2>Ajouter un item à la main</h2>
+          <h2>Ajouter un repas à ton répertoire</h2>
           <div class="row" style="align-items:flex-end;">
-            <label class="field" style="margin:0;"><span class="lbl">Item</span><input type="text" id="inpManualItem" placeholder="Ex. papier essuie-tout"></label>
-            <button class="btn btn-ghost" id="btnAddManualItem" style="flex:0 0 auto;">Ajouter à la liste</button>
+            <label class="field" style="margin:0;"><span class="lbl">Nom du repas</span><input type="text" id="inpCustomMeal" placeholder="Ex. poutine, hamburger et frites, soupe de ma mère"></label>
+            <button class="btn btn-ghost" id="btnAddCustomMeal" style="flex:0 0 auto;">Ajouter</button>
           </div>
         </div>
 
-        <div style="display:flex; gap:10px; margin-bottom:16px;">
-          <button class="btn btn-ghost" id="btnCopyList">Copier la liste</button>
-          <button class="btn btn-ghost" id="btnResetChecks">Décocher tout</button>
-        </div>
-
-        <div id="listeZone"></div>
+        <div class="meal-grid" id="mealGrid"></div>
       </section>
 
       <!-- ================= APPRENTISSAGE ================= -->
       <section class="panel" id="panel-appr">
         <h1 class="page-title">Apprentissage des portions</h1>
-        <p class="page-sub">Dites-moi ce qu'une recette a vraiment donné, et j'ajuste les quantités suggérées la prochaine fois.</p>
-
+        <p class="page-sub">Dis-moi ce qu'une recette a vraiment donné, j'ajuste les quantités la prochaine fois.</p>
         <div class="card">
           <h2>Enregistrer un résultat</h2>
           <div class="row">
@@ -327,10 +326,67 @@
             <label class="field"><span class="lbl">Quantité faite <small>× portion de base</small></span><input type="number" id="aMultiple" min="0.25" step="0.25" placeholder="1.5"></label>
             <label class="field"><span class="lbl">Repas + lunchs obtenus</span><input type="number" id="aRepas" min="1" step="1" placeholder="7"></label>
           </div>
-          <button class="btn btn-primary" id="btnAddRatio">Enregistrer ce ratio</button>
+          <button class="btn btn-primary" id="btnAddRatio">Enregistrer</button>
+        </div>
+        <div class="card"><h2>Ratios appris</h2><div id="ratioList"></div></div>
+      </section>
+
+      <!-- ================= MISE À JOUR ================= -->
+      <section class="panel" id="panel-maj">
+        <h1 class="page-title">Mise à jour</h1>
+        <p class="page-sub">Tout se change ici en tout temps et s'applique tout de suite. Changer le code postal relance une vraie recherche de nouveaux prix (nécessite le petit intermédiaire sécurisé — voir le prochain envoi).</p>
+
+        <div class="card">
+          <h2>Magasins et sources à inclure</h2>
+          <div class="store-grid" id="storeGrid"></div>
         </div>
 
-        <div class="card"><h2>Ratios appris</h2><div id="ratioList"></div></div>
+        <div class="card">
+          <h2>Budget</h2>
+          <div class="row">
+            <label class="field"><span class="lbl">Période</span>
+              <select id="inpPeriode">
+                <option value="1">1 semaine</option>
+                <option value="2">2 semaines</option>
+                <option value="3">3 semaines</option>
+                <option value="4">1 mois (4 semaines)</option>
+              </select>
+            </label>
+            <label class="field"><span class="lbl">Montant pour cette période</span><input type="number" id="inpBudget" min="0" step="5" placeholder="150"></label>
+          </div>
+          <p class="hint" id="budgetEquivHint"></p>
+        </div>
+
+        <div class="card">
+          <h2>Localisation</h2>
+          <label class="field"><span class="lbl">Code postal <small>détermine les circulaires locales</small></span><input type="text" id="inpPostal" placeholder="J2G 1A1" maxlength="7"></label>
+        </div>
+
+        <div class="card">
+          <h2>Famille</h2>
+          <label class="field" style="max-width:220px;"><span class="lbl">Personnes à table par repas</span>
+            <select id="inpPersonnes">
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+              <option value="4">4</option><option value="5">5</option><option value="6">6</option>
+              <option value="7">7</option><option value="8">8</option>
+            </select>
+          </label>
+          <div class="member-list" id="memberList"></div>
+          <div class="row" style="max-width:360px;">
+            <input type="text" id="inpMember" placeholder="Prénom">
+            <button class="btn btn-ghost btn-sm" id="btnAddMember" style="flex:0 0 auto;">Ajouter</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Importer le fichier de la semaine</h2>
+          <p class="hint">Si l'app n'est pas hébergée à côté de <code>data/rabais.json</code>.</p>
+          <label class="btn btn-ghost" style="cursor:pointer;">
+            Choisir rabais.json
+            <input type="file" id="importFile" accept="application/json,.json" style="display:none;">
+          </label>
+          <span id="importStatus" class="hint" style="margin-left:10px;"></span>
+        </div>
       </section>
 
     </main>
@@ -338,11 +394,10 @@
 </div>
 
 <nav class="bottom-nav" aria-label="Sections">
-  <button data-tab="config" class="active"><span class="ico">⚙️</span>Réglages</button>
-  <button data-tab="rabais"><span class="ico">🔎</span>Rabais</button>
+  <button data-tab="liste" class="active"><span class="ico">🧺</span>Liste</button>
   <button data-tab="repas"><span class="ico">🍲</span>Repas</button>
-  <button data-tab="liste"><span class="ico">🧺</span>Liste</button>
   <button data-tab="appr"><span class="ico">📈</span>Portions</button>
+  <button data-tab="maj"><span class="ico">🔄</span>Réglages</button>
 </nav>
 
 <div id="toast"></div>
@@ -351,16 +406,18 @@
 (function(){
   "use strict";
 
-  var STORAGE_KEY = "panierFute_v2";
-  var OLD_STORAGE_KEY = "panierFute_v1";
+  var STORAGE_KEY = "panierFute_v3";
+  var PREV_KEYS = ["panierFute_v2","panierFute_v1"];
   var state = null;
 
   function loadState(){
     try{
       var raw = localStorage.getItem(STORAGE_KEY);
       if(raw) return JSON.parse(raw);
-      var old = localStorage.getItem(OLD_STORAGE_KEY);
-      if(old) return JSON.parse(old); // migration douce depuis la version précédente
+      for(var i=0;i<PREV_KEYS.length;i++){
+        var old = localStorage.getItem(PREV_KEYS[i]);
+        if(old) return JSON.parse(old);
+      }
     }catch(e){}
     return null;
   }
@@ -374,26 +431,132 @@
         "Provigo": false, "Walmart": false, "Flashfood (anti-gaspi)": true,
         "Glouton (recettes)": false, "Flipp / reebee (circulaires)": true
       },
-      budget: 150, postal: "", portionsBase: 4, membres: ["Toi"],
-      rabais: [], mealChecked: {}, listChecked: {}, manualItems: [], ratios: [],
+      budgetPeriode: 1, budget: 150, postal: "", nbPersonnes: 4,
+      famille: [], activeMember: null, onboarded: false,
+      rabais: [], mealChecked: {}, listChecked: {}, manualItems: [],
+      customMeals: [], preferredRabaisFor: {}, mealHistory: [], ratios: [],
       lastAutoSync: null
     };
   }
 
+  /* ================= base de recettes ================= */
   var RECETTES = [
-    {id:"pate-chinois", nom:"Pâté chinois", principal:"boeuf hache", ingredients:[{n:"Bœuf haché",q:500,u:"g"},{n:"Maïs en grains",q:1,u:"boîte"},{n:"Pommes de terre",q:800,u:"g"},{n:"Oignon",q:1,u:"unité"}]},
-    {id:"spag-viande", nom:"Spaghetti sauce à la viande", principal:"boeuf hache", ingredients:[{n:"Bœuf haché",q:400,u:"g"},{n:"Pâtes spaghetti",q:450,u:"g"},{n:"Sauce tomate",q:700,u:"ml"},{n:"Oignon",q:1,u:"unité"}]},
-    {id:"boulettes-bbq", nom:"Boulettes sauce BBQ", principal:"boeuf hache", ingredients:[{n:"Bœuf haché",q:500,u:"g"},{n:"Chapelure",q:60,u:"g"},{n:"Sauce BBQ",q:250,u:"ml"},{n:"Riz",q:300,u:"g"}]},
-    {id:"chili", nom:"Chili maison", principal:"boeuf hache", ingredients:[{n:"Bœuf haché",q:450,u:"g"},{n:"Haricots rouges",q:1,u:"boîte"},{n:"Tomates en dés",q:796,u:"ml"},{n:"Poivron",q:1,u:"unité"}]},
-    {id:"pain-viande", nom:"Pain de viande", principal:"boeuf hache", ingredients:[{n:"Bœuf haché",q:600,u:"g"},{n:"Chapelure",q:80,u:"g"},{n:"Œuf",q:1,u:"unité"},{n:"Ketchup",q:60,u:"ml"}]},
-    {id:"general-tao", nom:"Général Tao maison", principal:"poulet", ingredients:[{n:"Poulet",q:500,u:"g"},{n:"Riz",q:350,u:"g"},{n:"Fécule de maïs",q:40,u:"g"},{n:"Brocoli",q:1,u:"unité"}]},
-    {id:"soupe-poulet", nom:"Soupe-repas poulet et nouilles", principal:"poulet", ingredients:[{n:"Poulet",q:350,u:"g"},{n:"Nouilles",q:200,u:"g"},{n:"Carotte",q:2,u:"unité"},{n:"Bouillon de poulet",q:1,u:"L"}]},
-    {id:"riz-frit", nom:"Riz frit au poulet", principal:"poulet", ingredients:[{n:"Poulet",q:400,u:"g"},{n:"Riz",q:400,u:"g"},{n:"Œuf",q:2,u:"unité"},{n:"Petits pois",q:150,u:"g"}]},
-    {id:"pates-poulet-brocoli", nom:"Pâtes au poulet et brocoli", principal:"poulet", ingredients:[{n:"Poulet",q:400,u:"g"},{n:"Pâtes courtes",q:400,u:"g"},{n:"Brocoli",q:1,u:"unité"},{n:"Crème 15%",q:250,u:"ml"}]},
-    {id:"saute-tofu", nom:"Sauté de légumes et tofu", principal:"tofu", ingredients:[{n:"Tofu ferme",q:400,u:"g"},{n:"Légumes sautés (mélange)",q:500,u:"g"},{n:"Sauce soya",q:60,u:"ml"},{n:"Riz",q:300,u:"g"}]},
-    {id:"soupe-pois", nom:"Soupe aux pois", principal:"jambon", ingredients:[{n:"Jambon",q:250,u:"g"},{n:"Pois jaunes secs",q:400,u:"g"},{n:"Carotte",q:2,u:"unité"},{n:"Oignon",q:1,u:"unité"}]},
-    {id:"pates-rosee", nom:"Pâtes sauce rosée", principal:"pates", ingredients:[{n:"Pâtes courtes",q:450,u:"g"},{n:"Sauce tomate",q:500,u:"ml"},{n:"Crème 15%",q:200,u:"ml"},{n:"Parmesan",q:60,u:"g"}]}
+    {id:"pate-chinois", nom:"Pâté chinois", categorie:"comfort-boeuf", ingredients:[{n:"Bœuf haché",q:500,u:"g"},{n:"Maïs en grains",q:1,u:"boîte"},{n:"Pommes de terre",q:800,u:"g"},{n:"Oignon",q:1,u:"unité"}]},
+    {id:"spag-viande", nom:"Spaghetti sauce à la viande", categorie:"pates", ingredients:[{n:"Bœuf haché",q:400,u:"g"},{n:"Pâtes spaghetti",q:450,u:"g"},{n:"Sauce tomate",q:700,u:"ml"},{n:"Oignon",q:1,u:"unité"}]},
+    {id:"boulettes-bbq", nom:"Boulettes sauce BBQ", categorie:"comfort-boeuf", ingredients:[{n:"Bœuf haché",q:500,u:"g"},{n:"Chapelure",q:60,u:"g"},{n:"Sauce BBQ",q:250,u:"ml"},{n:"Riz",q:300,u:"g"}]},
+    {id:"chili", nom:"Chili maison", categorie:"comfort-boeuf", ingredients:[{n:"Bœuf haché",q:450,u:"g"},{n:"Haricots rouges",q:1,u:"boîte"},{n:"Tomates en dés",q:796,u:"ml"},{n:"Poivron",q:1,u:"unité"}]},
+    {id:"pain-viande", nom:"Pain de viande", categorie:"comfort-boeuf", ingredients:[{n:"Bœuf haché",q:600,u:"g"},{n:"Chapelure",q:80,u:"g"},{n:"Œuf",q:1,u:"unité"},{n:"Ketchup",q:60,u:"ml"}]},
+    {id:"general-tao", nom:"Général Tao maison", categorie:"asiatique", ingredients:[{n:"Poulet",q:500,u:"g"},{n:"Riz",q:350,u:"g"},{n:"Fécule de maïs",q:40,u:"g"},{n:"Brocoli",q:1,u:"unité"}]},
+    {id:"soupe-poulet", nom:"Soupe-repas poulet et nouilles", categorie:"soupe", ingredients:[{n:"Poulet",q:350,u:"g"},{n:"Nouilles",q:200,u:"g"},{n:"Carotte",q:2,u:"unité"},{n:"Bouillon de poulet",q:1,u:"L"}]},
+    {id:"riz-frit", nom:"Riz frit au poulet", categorie:"asiatique", ingredients:[{n:"Poulet",q:400,u:"g"},{n:"Riz",q:400,u:"g"},{n:"Œuf",q:2,u:"unité"},{n:"Petits pois",q:150,u:"g"}]},
+    {id:"pates-poulet-brocoli", nom:"Pâtes au poulet et brocoli", categorie:"pates", ingredients:[{n:"Poulet",q:400,u:"g"},{n:"Pâtes courtes",q:400,u:"g"},{n:"Brocoli",q:1,u:"unité"},{n:"Crème 15%",q:250,u:"ml"}]},
+    {id:"saute-tofu", nom:"Sauté de légumes et tofu", categorie:"vegetarien", ingredients:[{n:"Tofu ferme",q:400,u:"g"},{n:"Légumes sautés (mélange)",q:500,u:"g"},{n:"Sauce soya",q:60,u:"ml"},{n:"Riz",q:300,u:"g"}]},
+    {id:"soupe-pois", nom:"Soupe aux pois", categorie:"soupe", ingredients:[{n:"Jambon",q:250,u:"g"},{n:"Pois jaunes secs",q:400,u:"g"},{n:"Carotte",q:2,u:"unité"},{n:"Oignon",q:1,u:"unité"}]},
+    {id:"pates-rosee", nom:"Pâtes sauce rosée", categorie:"pates", ingredients:[{n:"Pâtes courtes",q:450,u:"g"},{n:"Sauce tomate",q:500,u:"ml"},{n:"Crème 15%",q:200,u:"ml"},{n:"Parmesan",q:60,u:"g"}]},
+    {id:"poutine", nom:"Poutine maison", categorie:"comfort-quebecois", ingredients:[{n:"Pommes de terre",q:1000,u:"g"},{n:"Fromage en grains",q:250,u:"g"},{n:"Sauce à poutine",q:500,u:"ml"}]},
+    {id:"hamburger-frites", nom:"Hamburger et frites maison", categorie:"comfort-boeuf", ingredients:[{n:"Bœuf haché",q:500,u:"g"},{n:"Pain à hamburger",q:4,u:"unité"},{n:"Pommes de terre",q:800,u:"g"},{n:"Fromage tranché",q:4,u:"unité"}]},
+    {id:"soupe-legumes", nom:"Soupe aux légumes maison", categorie:"soupe", ingredients:[{n:"Carotte",q:3,u:"unité"},{n:"Céleri",q:2,u:"unité"},{n:"Pommes de terre",q:400,u:"g"},{n:"Bouillon de poulet",q:1,u:"L"}]},
+    {id:"pizza-maison", nom:"Pizza maison", categorie:"comfort-quebecois", ingredients:[{n:"Pâte à pizza",q:1,u:"unité"},{n:"Sauce tomate",q:250,u:"ml"},{n:"Fromage mozzarella",q:300,u:"g"},{n:"Pepperoni",q:150,u:"g"}]}
   ];
+
+  /* ================= synonymes & recherche floue ================= */
+  var SYNONYMES = {
+    "papier hygienique": ["papier de toilette","papier toilette","papier cul","pq"],
+    "boeuf hache": ["viande hachee","boeuf mi-maigre","boeuf hache mi-maigre","hamburger steak"],
+    "poulet": ["poitrine de poulet","cuisse de poulet","hauts de cuisse"],
+    "pates": ["macaroni","spaghetti","penne","nouilles"],
+    "lait": ["lait 2%","lait homogeneise","lait ecreme"],
+    "detergent a lessive": ["savon a lessive","detergent a linge"],
+    "essuie-tout": ["papier essuie-tout","papier absorbant"]
+  };
+  function expandSynonymes(q){
+    var out = [q];
+    Object.keys(SYNONYMES).forEach(function(canon){
+      var group = [canon].concat(SYNONYMES[canon]);
+      if(group.some(function(g){ return g.indexOf(q) !== -1 || q.indexOf(g) !== -1; })){
+        group.forEach(function(g){ if(out.indexOf(g) === -1) out.push(g); });
+      }
+    });
+    return out;
+  }
+  function levenshtein(a, b){
+    if(a === b) return 0;
+    var al=a.length, bl=b.length;
+    if(al===0) return bl; if(bl===0) return al;
+    var prev = new Array(bl+1);
+    for(var j=0;j<=bl;j++) prev[j]=j;
+    for(var i=1;i<=al;i++){
+      var cur=[i];
+      for(var k=1;k<=bl;k++){
+        var cost = a[i-1]===b[k-1] ? 0 : 1;
+        cur[k] = Math.min(prev[k]+1, cur[k-1]+1, prev[k-1]+cost);
+      }
+      prev = cur;
+    }
+    return prev[bl];
+  }
+  function fuzzyIncludes(haystack, needle){
+    haystack = norm(haystack); needle = norm(needle);
+    if(!needle) return true;
+    if(haystack.indexOf(needle) !== -1) return true;
+    // tolère 1-2 fautes selon la longueur du mot cherché
+    var words = haystack.split(/\s+/);
+    var tolerance = needle.length <= 4 ? 1 : 2;
+    return words.some(function(w){ return levenshtein(w.slice(0,needle.length+tolerance), needle) <= tolerance; });
+  }
+  function matchesQuery(ingredientName, query){
+    var variants = expandSynonymes(norm(query));
+    return variants.some(function(v){ return fuzzyIncludes(ingredientName, v); });
+  }
+  function matches(a, b){
+    a = norm(a); b = norm(b);
+    if(!a || !b) return false;
+    return a.indexOf(b) !== -1 || b.indexOf(a) !== -1;
+  }
+
+  /* ================= unités & comparaison de prix ================= */
+  var UNIT_TO_BASE = { g:1, kg:1000, ml:1, l:1000, litre:1000, litres:1000, unite:1, unites:1, un:1 };
+  function parseQtyUnit(text){
+    var m = norm(text).match(/(\d+[\.,]?\d*)\s*(kg|g|ml|l|litres?|unites?|un)\b/);
+    if(!m) return {qty:1, unit:"unite"};
+    var qty = parseFloat(m[1].replace(",", "."));
+    var unit = m[2].replace(/s$/,"");
+    if(unit === "litre") unit = "l";
+    return {qty: qty || 1, unit: unit};
+  }
+  function unitFamily(unit){
+    if(unit === "g" || unit === "kg") return "poids";
+    if(unit === "ml" || unit === "l") return "volume";
+    return "unite";
+  }
+  function pricePerBase(rabaisItem){
+    var pu = parseQtyUnit(rabaisItem.ingredient);
+    var factor = UNIT_TO_BASE[pu.unit] || 1;
+    var baseQty = pu.qty * factor;
+    if(!rabaisItem.prix || !baseQty) return null;
+    return rabaisItem.prix / baseQty;
+  }
+  function comparisonKey(name){
+    // mot(s) significatif(s) du nom, sans les nombres/unités, pour regrouper les articles "similaires"
+    return norm(name).replace(/\d+[\.,]?\d*\s*(kg|g|ml|l|litres?|unites?|un)\b/g,"").replace(/[^a-z\s]/g,"").trim();
+  }
+  function findBetterAlternative(rabaisItem){
+    var key = comparisonKey(rabaisItem.ingredient);
+    if(!key) return null;
+    var myPpb = pricePerBase(rabaisItem);
+    if(myPpb === null) return null;
+    var best = null;
+    state.rabais.forEach(function(r){
+      if(r.id === rabaisItem.id) return;
+      var rKey = comparisonKey(r.ingredient);
+      if(levenshtein(rKey, key) > Math.max(2, Math.floor(key.length*0.25))) return; // trop différent pour être "similaire"
+      var ppb = pricePerBase(r);
+      if(ppb === null) return;
+      if(!best || ppb < best.ppb) best = {item:r, ppb:ppb};
+    });
+    if(best && best.ppb < myPpb * 0.97) return best; // au moins ~3% moins cher pour valoir un avertissement
+    return null;
+  }
 
   function norm(s){ return (s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim(); }
   function uid(){ return Math.random().toString(36).slice(2,10); }
@@ -402,12 +565,7 @@
     var t = document.getElementById("toast");
     t.textContent = msg; t.classList.add("show");
     clearTimeout(toast._h);
-    toast._h = setTimeout(function(){ t.classList.remove("show"); }, 2200);
-  }
-  function matches(a, b){
-    a = norm(a); b = norm(b);
-    if(!a || !b) return false;
-    return a.indexOf(b) !== -1 || b.indexOf(a) !== -1;
+    toast._h = setTimeout(function(){ t.classList.remove("show"); }, 2600);
   }
   function debounce(fn, ms){
     var t;
@@ -421,12 +579,73 @@
   }
   function scaleFactorForRecette(recette){
     var ratio = recetteRatio(recette.id);
-    var base = state.portionsBase || 4;
+    var base = state.nbPersonnes || 4;
     if(ratio && ratio.repas > 0 && ratio.multiple > 0){
       var mealsPerMultiple = ratio.repas / ratio.multiple;
       return base / mealsPerMultiple;
     }
     return base / 4;
+  }
+  function allRecettes(){ return RECETTES.concat(state.customMeals); }
+
+  /* ================= onboarding ================= */
+  function needsOnboarding(){ return !state.onboarded || !state.activeMember; }
+  function runOnboarding(){
+    var overlay = document.getElementById("onboard");
+    var q = document.getElementById("onboardQuestion");
+    var inp = document.getElementById("onboardInput");
+    var sel = document.getElementById("onboardSelect");
+    var btn = document.getElementById("onboardNext");
+    overlay.style.display = "flex";
+
+    var step = state.famille.length ? "personnes" : "nom";
+    function showStep(){
+      if(step === "nom"){
+        q.textContent = "Salut ! Comment tu t'appelles ?";
+        inp.style.display = "block"; sel.style.display = "none"; inp.value = ""; inp.focus();
+      } else {
+        q.textContent = "Combien de personnes mangent, en général ?";
+        sel.innerHTML = "";
+        for(var i=1;i<=8;i++){ var o=document.createElement("option"); o.value=i; o.textContent=i; sel.appendChild(o); }
+        sel.value = state.nbPersonnes || 4;
+        inp.style.display = "none"; sel.style.display = "block";
+      }
+    }
+    showStep();
+    btn.onclick = function(){
+      if(step === "nom"){
+        var name = inp.value.trim();
+        if(!name) return;
+        if(state.famille.indexOf(name) === -1) state.famille.push(name);
+        state.activeMember = name;
+        step = "personnes";
+        showStep();
+      } else {
+        state.nbPersonnes = parseInt(sel.value) || 4;
+        state.onboarded = true;
+        saveState();
+        overlay.style.display = "none";
+        render();
+      }
+    };
+  }
+  function pickMember(){
+    var overlay = document.getElementById("onboard");
+    var q = document.getElementById("onboardQuestion");
+    var inp = document.getElementById("onboardInput");
+    var sel = document.getElementById("onboardSelect");
+    var btn = document.getElementById("onboardNext");
+    overlay.style.display = "flex";
+    q.textContent = "Qui es-tu ?";
+    inp.style.display = "none"; sel.style.display = "block";
+    sel.innerHTML = "";
+    state.famille.forEach(function(m){ var o=document.createElement("option"); o.value=m; o.textContent=m; sel.appendChild(o); });
+    var newOpt = document.createElement("option"); newOpt.value="__new__"; newOpt.textContent="+ Nouvelle personne";
+    sel.appendChild(newOpt);
+    btn.onclick = function(){
+      if(sel.value === "__new__"){ overlay.style.display="none"; state.onboarded=false; runOnboarding(); return; }
+      state.activeMember = sel.value; saveState(); overlay.style.display = "none"; render();
+    };
   }
 
   /* ================= rendering ================= */
@@ -434,9 +653,14 @@
     renderTopbar(); renderStores(); renderConfigFields(); renderMembers();
     renderMagasinSelect(); renderSearchResults(); renderMeals(); renderListe();
     renderRecetteSelect(); renderRatios(); applyTheme(); renderSyncStatus();
+    if(needsOnboarding()) runOnboarding();
   }
 
-  function renderTopbar(){ document.getElementById("budgetPillVal").textContent = state.budget ? money(state.budget) : "—"; }
+  function periodeLabel(n){ return n==1?"semaine":n+" semaines"; }
+  function renderTopbar(){
+    document.getElementById("whoName").textContent = state.activeMember || "—";
+    document.getElementById("budgetPillVal").textContent = state.budget ? (money(state.budget) + " / " + periodeLabel(state.budgetPeriode)) : "—";
+  }
 
   function renderStores(){
     var grid = document.getElementById("storeGrid");
@@ -446,9 +670,7 @@
       var chip = document.createElement("label");
       chip.className = "store-chip" + (checked ? " checked" : "");
       chip.innerHTML = '<input type="checkbox" ' + (checked?"checked":"") + '><span>' + name + '</span>';
-      chip.querySelector("input").addEventListener("change", function(e){
-        state.stores[name] = e.target.checked; saveState(); render();
-      });
+      chip.querySelector("input").addEventListener("change", function(e){ state.stores[name] = e.target.checked; saveState(); render(); });
       grid.appendChild(chip);
     });
   }
@@ -456,25 +678,28 @@
   function renderConfigFields(){
     document.getElementById("inpBudget").value = state.budget || "";
     document.getElementById("inpPostal").value = state.postal || "";
-    document.getElementById("inpPortions").value = state.portionsBase || "";
+    document.getElementById("inpPeriode").value = state.budgetPeriode || 1;
+    document.getElementById("inpPersonnes").value = state.nbPersonnes || 4;
+    var weekly = state.budget && state.budgetPeriode ? state.budget / state.budgetPeriode : 0;
+    document.getElementById("budgetEquivHint").textContent = weekly ? ("Équivaut à " + money(weekly) + " par semaine pour le suivi.") : "";
   }
 
   function renderMembers(){
     var wrap = document.getElementById("memberList");
     wrap.innerHTML = "";
-    state.membres.forEach(function(m, i){
+    state.famille.forEach(function(m, i){
       var el = document.createElement("div");
-      el.className = "member";
+      el.className = "member" + (m === state.activeMember ? " active" : "");
       el.innerHTML = '<span>' + m + '</span>';
+      el.addEventListener("click", function(ev){ if(ev.target.tagName!=="BUTTON"){ state.activeMember = m; saveState(); render(); } });
       var btn = document.createElement("button");
       btn.textContent = "×"; btn.title = "Retirer";
-      btn.addEventListener("click", function(){ state.membres.splice(i,1); saveState(); render(); });
+      btn.addEventListener("click", function(ev){ ev.stopPropagation(); state.famille.splice(i,1); saveState(); render(); });
       el.appendChild(btn); wrap.appendChild(el);
     });
   }
 
   function activeStores(){ return Object.keys(state.stores).filter(function(s){ return state.stores[s]; }); }
-
   function renderMagasinSelect(){
     var sel = document.getElementById("rMagasin");
     var current = sel.value; sel.innerHTML = "";
@@ -489,6 +714,13 @@
     return '<div class="thumb"><img src="' + url + '" alt="" loading="lazy" onerror="this.parentElement.innerHTML=\'🛒\'"></div>';
   }
 
+  function addRabaisToList(r){
+    if(!state.manualItems.some(function(m){ return m.nom === r.ingredient; })){
+      state.manualItems.push({id:uid(), nom:r.ingredient});
+    }
+    saveState(); render(); toast(r.ingredient + " ajouté à la liste.");
+  }
+
   function renderResultCard(r){
     var row = document.createElement("div");
     row.className = "result-card";
@@ -496,31 +728,31 @@
       imageThumb(r.image) +
       '<div class="rc-main"><div class="nom">' + r.ingredient + '</div><div class="magasin">' + r.magasin + '</div></div>' +
       '<div class="rc-prix">' + (r.prix ? money(r.prix) : "—") + '</div>' +
-      '<label class="fam-flag"><input type="checkbox" ' + (r.familial?"checked":"") + '> familial</label>';
+      '<label class="fam-flag"><input type="checkbox" ' + (r.familial?"checked":"") + '> familial</label>' +
+      '<button class="rc-add">+ liste</button>';
+    row.querySelector(".rc-add").addEventListener("click", function(){ addRabaisToList(r); });
     var famCb = row.querySelector(".fam-flag input");
     famCb.addEventListener("change", function(){ r.familial = famCb.checked; saveState(); renderMeals(); renderListe(); });
     var del = document.createElement("button");
-    del.className = "del-btn"; del.innerHTML = "🗑"; del.title = "Retirer";
-    del.addEventListener("click", function(){
-      state.rabais = state.rabais.filter(function(x){ return x.id !== r.id; });
-      saveState(); render();
-    });
+    del.className = "del-btn"; del.innerHTML = "🗑"; del.title = "Retirer ce rabais";
+    del.addEventListener("click", function(){ state.rabais = state.rabais.filter(function(x){ return x.id !== r.id; }); saveState(); render(); });
     row.appendChild(del);
     return row;
   }
 
   function renderSearchResults(){
     var wrap = document.getElementById("resultList");
-    var q = norm(document.getElementById("searchRabais").value);
+    var qRaw = document.getElementById("searchRabais").value;
+    var q = qRaw.trim();
     wrap.innerHTML = "";
     if(!q){
       wrap.innerHTML = '<div class="empty">' + (state.rabais.length
         ? ('Tapez pour chercher parmi vos ' + state.rabais.length + ' rabais actifs.')
-        : 'Aucun rabais chargé encore — importez le fichier de la semaine ci-dessous, ou ajoutez-en un à la main.') + '</div>';
+        : 'Aucun rabais chargé encore — importez le fichier de la semaine dans Mise à jour, ou ajoutez-en un à la main plus bas.') + '</div>';
       return;
     }
-    var found = state.rabais.filter(function(r){ return norm(r.ingredient).indexOf(q) !== -1; });
-    if(found.length === 0){ wrap.innerHTML = '<div class="empty">Aucun rabais ne correspond à « ' + document.getElementById("searchRabais").value + ' ».</div>'; return; }
+    var found = state.rabais.filter(function(r){ return matchesQuery(r.ingredient, q); });
+    if(found.length === 0){ wrap.innerHTML = '<div class="empty">Aucun rabais ne correspond à « ' + qRaw + ' ».</div>'; return; }
     found.forEach(function(r){ wrap.appendChild(renderResultCard(r)); });
   }
 
@@ -530,7 +762,7 @@
       var d = new Date(state.lastAutoSync);
       el.textContent = "Dernier chargement automatique : " + d.toLocaleString("fr-CA");
     } else {
-      el.textContent = "Chargement automatique : pas encore réussi ici (nécessite que l'app soit hébergée à côté de data/rabais.json — ex. GitHub Pages).";
+      el.textContent = "Chargement automatique : pas encore réussi ici.";
     }
   }
 
@@ -539,18 +771,59 @@
     state.manualItems.forEach(function(m){ pool.push(m.nom); });
     return pool;
   }
-
   function suggestedRecetteIds(){
     var famRabais = state.rabais.filter(function(r){ return r.familial; });
     var ids = {};
     famRabais.forEach(function(r){
-      RECETTES.filter(function(rec){ return rec.ingredients.some(function(ing){ return matches(r.ingredient, ing.n); }); })
+      allRecettes().filter(function(rec){ return rec.ingredients.some(function(ing){ return matches(r.ingredient, ing.n); }); })
         .slice(0,3).forEach(function(rec){ ids[rec.id] = r.ingredient; });
     });
     return ids;
   }
 
+  /* ---- suggestions basées sur l'historique de la famille ---- */
+  function renderTasteSuggestions(){
+    var zone = document.getElementById("suggBannerZone");
+    zone.innerHTML = "";
+    if(state.mealHistory.length < 3){
+      return; // pas assez d'historique — on ne force rien
+    }
+    var counts = {};
+    state.mealHistory.forEach(function(h){ counts[h.recetteId] = (counts[h.recetteId]||0) + 1; });
+    var repeated = Object.keys(counts).filter(function(id){ return counts[id] >= 2; })
+      .sort(function(a,b){ return counts[b]-counts[a]; }).slice(0,3);
+
+    var catCounts = {};
+    state.mealHistory.forEach(function(h){
+      var rec = allRecettes().find(function(r){ return r.id === h.recetteId; });
+      if(rec && rec.categorie) catCounts[rec.categorie] = (catCounts[rec.categorie]||0)+1;
+    });
+    var topCat = Object.keys(catCounts).sort(function(a,b){ return catCounts[b]-catCounts[a]; })[0];
+    var triedIds = Object.keys(counts);
+    var catSuggestions = topCat ? RECETTES.filter(function(r){ return r.categorie === topCat && triedIds.indexOf(r.id) === -1; }).slice(0,3) : [];
+
+    if(repeated.length === 0 && catSuggestions.length === 0) return;
+
+    var html = '<div class="sugg-banner"><h3>✨ Suggestions pour ta famille</h3><div class="sugg-row">';
+    repeated.forEach(function(id){
+      var rec = allRecettes().find(function(r){ return r.id === id; });
+      if(rec) html += '<span class="sugg-chip" data-id="' + rec.id + '">🔁 ' + rec.nom + '</span>';
+    });
+    catSuggestions.forEach(function(rec){
+      html += '<span class="sugg-chip" data-id="' + rec.id + '">💡 ' + rec.nom + ' (comme vous aimez)</span>';
+    });
+    html += '</div></div>';
+    zone.innerHTML = html;
+    zone.querySelectorAll(".sugg-chip").forEach(function(chip){
+      chip.addEventListener("click", function(){
+        var id = chip.getAttribute("data-id");
+        state.mealChecked[id] = true; saveState(); render(); setTab("repas");
+      });
+    });
+  }
+
   function renderMeals(){
+    renderTasteSuggestions();
     var bannerZone = document.getElementById("famBannerZone");
     var suggestions = suggestedRecetteIds();
     var famNames = Array.from(new Set(Object.values(suggestions)));
@@ -565,7 +838,7 @@
     var pool = combinedIngredientPool();
     var manualNames = state.manualItems.map(function(m){ return m.nom; });
 
-    var relevant = RECETTES.filter(function(rec){
+    var relevant = allRecettes().filter(function(rec){
       if(pool.length === 0) return true;
       return rec.ingredients.some(function(ing){ return pool.some(function(p){ return matches(p, ing.n); }); }) || suggestions[rec.id];
     });
@@ -574,64 +847,132 @@
     var grid = document.getElementById("mealGrid");
     grid.innerHTML = "";
     if(relevant.length === 0){
-      grid.innerHTML = '<div class="empty">Aucune recette ne correspond encore — essayez un ingrédient plus courant (poulet, bœuf haché, pâtes…).</div>';
+      grid.innerHTML = '<div class="empty">Aucune recette ne correspond encore — essaie un ingrédient plus courant, ou ajoute ton propre repas ci-dessus.</div>';
       return;
     }
     relevant.forEach(function(rec){
+      var isCustom = !!state.customMeals.find(function(c){ return c.id === rec.id; });
       var isSuggested = !!suggestions[rec.id];
       var fromListOnly = !isSuggested && rec.ingredients.some(function(ing){ return manualNames.some(function(n){ return matches(n, ing.n); }); });
       if(isSuggested && !(rec.id in state.mealChecked)) state.mealChecked[rec.id] = true;
-      var checked = !!state.mealChecked[rec.id];
+      var wasChecked = !!state.mealChecked[rec.id];
       var card = document.createElement("div");
-      card.className = "meal-card" + (checked?" checked":"") + (isSuggested?" suggested":"");
-      var ingLine = rec.ingredients.map(function(i){ return i.n; }).join(" · ");
+      card.className = "meal-card" + (wasChecked?" checked":"") + (isSuggested?" suggested":"");
+      var ingLine = rec.ingredients.map(function(i){
+        var onSale = state.rabais.some(function(r){ return matches(r.ingredient, i.n); });
+        return onSale ? ('<span class="on-sale">' + i.n + ' ✓</span>') : i.n;
+      }).join(" · ");
       card.innerHTML =
-        '<div class="meal-top"><div class="meal-name">' + rec.nom + '</div><input type="checkbox" ' + (checked?"checked":"") + '></div>' +
-        '<div class="meal-ing">' + ingLine + '</div>' +
-        '<div class="meal-tags"><span class="badge badge-store">' + (state.portionsBase||4) + ' portions</span>' +
-        (fromListOnly ? '<span class="badge badge-list">🧾 dans votre liste</span>' : '') + '</div>';
-      var cb = card.querySelector("input");
-      function toggle(){ state.mealChecked[rec.id] = !state.mealChecked[rec.id]; saveState(); render(); }
+        '<div class="meal-top"><div class="meal-name">' + rec.nom + '</div><input type="checkbox" ' + (wasChecked?"checked":"") + '></div>' +
+        '<div class="meal-ing">' + (rec.ingredients.length ? ingLine : '<em>Aucun ingrédient encore — clique « affiner » ci-dessous.</em>') + '</div>' +
+        '<div class="meal-tags"><span class="badge badge-store">' + (state.nbPersonnes||4) + ' personnes</span>' +
+        (fromListOnly ? '<span class="badge badge-list">🧾 dans votre liste</span>' : '') +
+        (isCustom ? '<span class="badge badge-onsale">✍️ personnalisé</span>' : '') + '</div>';
+      if(isCustom){
+        var delBtn = document.createElement("button");
+        delBtn.className = "meal-del"; delBtn.innerHTML = "🗑";
+        delBtn.title = "Retirer ce repas du répertoire";
+        delBtn.addEventListener("click", function(ev){
+          ev.stopPropagation();
+          state.customMeals = state.customMeals.filter(function(c){ return c.id !== rec.id; });
+          delete state.mealChecked[rec.id];
+          saveState(); render();
+        });
+        card.appendChild(delBtn);
+
+        var refineBox = document.createElement("div");
+        refineBox.className = "refine-box";
+        var custom = state.customMeals.find(function(c){ return c.id === rec.id; });
+        var listHtml = '<div class="refine-list">' + custom.ingredients.map(function(ing,idx){
+          return '<div class="refine-item"><span>' + ing.n + '</span><button class="del-btn" data-idx="' + idx + '">🗑</button></div>';
+        }).join("") + '</div>';
+        refineBox.innerHTML =
+          '<label style="font-size:12.5px; display:flex; gap:6px; align-items:center; cursor:pointer;"><input type="checkbox" class="refine-toggle"> affiner la recette</label>' +
+          '<div class="refine-panel" style="display:none; margin-top:8px;">' + listHtml +
+          '<input type="text" class="refine-search" placeholder="Ex. sauce, fromage…" style="font-size:13px; padding:8px;">' +
+          '<div class="refine-suggest"></div></div>';
+        refineBox.addEventListener("click", function(e){ e.stopPropagation(); });
+        card.appendChild(refineBox);
+
+        var toggle = refineBox.querySelector(".refine-toggle");
+        var panel = refineBox.querySelector(".refine-panel");
+        toggle.addEventListener("change", function(){ panel.style.display = toggle.checked ? "block" : "none"; });
+
+        refineBox.querySelectorAll(".refine-item .del-btn").forEach(function(btn){
+          btn.addEventListener("click", function(){
+            custom.ingredients.splice(parseInt(btn.getAttribute("data-idx")),1);
+            saveState(); render();
+          });
+        });
+
+        var rsearch = refineBox.querySelector(".refine-search");
+        var rsuggest = refineBox.querySelector(".refine-suggest");
+        rsearch.addEventListener("input", debounce(function(){
+          var q = rsearch.value.trim();
+          rsuggest.innerHTML = "";
+          if(!q) return;
+          var candidateNames = Array.from(new Set(state.rabais.map(function(r){ return r.ingredient; })
+            .concat(RECETTES.flatMap(function(r){ return r.ingredients.map(function(i){ return i.n; }); }))));
+          var found = candidateNames.filter(function(n){ return matchesQuery(n, q); }).slice(0,6);
+          found.forEach(function(n){
+            var b = document.createElement("button");
+            b.textContent = "+ " + n;
+            b.addEventListener("click", function(){
+              custom.ingredients.push({n:n, q:1, u:"unité"});
+              rsearch.value = ""; rsuggest.innerHTML = "";
+              saveState(); render();
+            });
+            rsuggest.appendChild(b);
+          });
+          if(found.length === 0){ rsuggest.innerHTML = '<div style="font-size:12px; color:var(--text-muted); padding:4px;">Aucune correspondance dans vos rabais ou recettes connues.</div>'; }
+        }, 150));
+      }
+
+      var cb = card.querySelector(".meal-top input");
+      function toggle(){
+        var willCheck = !state.mealChecked[rec.id];
+        state.mealChecked[rec.id] = willCheck;
+        if(willCheck) state.mealHistory.push({recetteId: rec.id, date: new Date().toISOString()});
+        if(state.mealHistory.length > 300) state.mealHistory = state.mealHistory.slice(-300);
+        saveState(); render();
+      }
       cb.addEventListener("click", function(e){ e.stopPropagation(); toggle(); });
-      card.addEventListener("click", toggle);
+      card.addEventListener("click", function(e){ if(!e.target.closest(".refine-box")) toggle(); });
       grid.appendChild(card);
     });
   }
 
   function bestStoreForIngredient(name){
+    var pref = state.preferredRabaisFor[norm(name)];
+    if(pref){ var pr = state.rabais.find(function(r){ return r.id === pref; }); if(pr) return pr; }
     var match = null;
-    state.rabais.forEach(function(r){
-      if(matches(r.ingredient, name)){ if(!match || (r.prix && (!match.prix || r.prix < match.prix))) match = r; }
-    });
-    return match ? match.magasin : null;
-  }
-  function priceForIngredient(name){
-    var match = null;
-    state.rabais.forEach(function(r){ if(matches(r.ingredient, name) && r.prix){ if(!match || r.prix < match) match = r.prix; } });
+    state.rabais.forEach(function(r){ if(matches(r.ingredient, name)){ if(!match || (r.prix && (!match.prix || r.prix < match.prix))) match = r; } });
     return match;
   }
 
   function buildAggregatedList(){
     var checkedIds = Object.keys(state.mealChecked).filter(function(k){ return state.mealChecked[k]; });
-    var recettes = RECETTES.filter(function(r){ return checkedIds.indexOf(r.id) !== -1; });
+    var recettes = allRecettes().filter(function(r){ return checkedIds.indexOf(r.id) !== -1; });
     var byStore = {}; var totalCost = 0; var anyCost = false;
+    var entries = []; // pour la comparaison de prix
     recettes.forEach(function(rec){
       var factor = scaleFactorForRecette(rec);
       rec.ingredients.forEach(function(ing){
-        var store = bestStoreForIngredient(ing.n) || "Magasin au choix (aucun rabais associé)";
+        var chosen = bestStoreForIngredient(ing.n);
+        var store = chosen ? chosen.magasin : "Magasin au choix (aucun rabais associé)";
         var qty = Math.round(ing.q * factor * 10)/10;
         byStore[store] = byStore[store] || {};
         if(byStore[store][ing.n]) byStore[store][ing.n].q += qty;
         else byStore[store][ing.n] = {q: qty, u: ing.u};
-        var p = priceForIngredient(ing.n);
-        if(p){ totalCost += p; anyCost = true; }
+        if(chosen && chosen.prix){ totalCost += chosen.prix; anyCost = true; }
+        if(chosen) entries.push({ing:ing.n, chosen:chosen});
       });
     });
     if(state.manualItems.length){
       byStore["Ajoutés à la main"] = byStore["Ajoutés à la main"] || {};
       state.manualItems.forEach(function(m){ byStore["Ajoutés à la main"][m.nom] = {q:"", u:""}; });
     }
-    return {byStore: byStore, totalCost: totalCost, anyCost: anyCost, hasMeals: recettes.length > 0 || state.manualItems.length > 0};
+    return {byStore: byStore, totalCost: totalCost, anyCost: anyCost, hasMeals: recettes.length > 0 || state.manualItems.length > 0, entries: entries};
   }
 
   function renderListe(){
@@ -640,18 +981,19 @@
     zone.innerHTML = "";
 
     var budget = state.budget || 0;
-    var pct = budget > 0 ? Math.min(100, (data.totalCost/budget)*100) : 0;
+    var weeklyBudget = budget && state.budgetPeriode ? budget / state.budgetPeriode : 0;
+    var pct = weeklyBudget > 0 ? Math.min(100, (data.totalCost/weeklyBudget)*100) : 0;
     document.getElementById("costEstime").textContent = money(data.totalCost);
     var bar = document.getElementById("costBar");
     bar.style.width = pct + "%";
-    bar.classList.toggle("over", budget > 0 && data.totalCost > budget);
-    document.getElementById("costBudgetTxt").textContent = budget ? ("Budget : " + money(budget)) : "";
+    bar.classList.toggle("over", weeklyBudget > 0 && data.totalCost > weeklyBudget);
+    document.getElementById("costBudgetTxt").textContent = weeklyBudget ? ("≈ " + money(weeklyBudget) + " / semaine") : "";
     document.getElementById("costMsg").textContent = data.hasMeals
-      ? (data.anyCost ? "Basé sur les prix saisis dans Rabais (items sans prix non comptés)." : "Aucun prix saisi encore pour ces ingrédients.")
+      ? (data.anyCost ? "Basé sur les prix connus (items sans prix non comptés)." : "Aucun prix connu encore pour ces ingrédients.")
       : "Aucun repas ni item sélectionné.";
 
     var stores = Object.keys(data.byStore);
-    if(stores.length === 0){ zone.innerHTML = '<div class="empty">Cochez des repas dans l\'onglet Repas, ou ajoutez un item à la main.</div>'; return; }
+    if(stores.length === 0){ zone.innerHTML = '<div class="empty">Coche des repas dans l\'onglet Repas, ou ajoute un item à la main.</div>'; return; }
     stores.forEach(function(store){
       var group = document.createElement("div");
       group.className = "store-group";
@@ -667,13 +1009,34 @@
         row.innerHTML = '<input type="checkbox" ' + (done?"checked":"") + '><span class="txt">' + name + qtyTxt + '</span>';
         var cb = row.querySelector("input");
         cb.addEventListener("change", function(){ state.listChecked[key] = cb.checked; saveState(); row.classList.toggle("done", cb.checked); });
+
+        var chosenEntry = data.entries.find(function(e){ return e.ing === name; });
+        if(chosenEntry){
+          var alt = findBetterAlternative(chosenEntry.chosen);
+          if(alt){
+            var warn = document.createElement("span");
+            warn.className = "badge badge-warn";
+            warn.textContent = "⚠️ meilleur prix ailleurs";
+            row.appendChild(warn);
+            var box = document.createElement("div");
+            box.className = "compare-box"; box.style.display = "none";
+            box.innerHTML = "Vous avez : <strong>" + chosenEntry.chosen.magasin + "</strong> — " + money(chosenEntry.chosen.prix||0) +
+              "<br>Meilleur trouvé : <strong>" + alt.item.magasin + "</strong> — " + money(alt.item.prix||0) +
+              " (pour " + alt.item.ingredient + ")<br><span class='use-btn'>Utiliser celui-ci →</span>";
+            warn.addEventListener("click", function(){ box.style.display = box.style.display==="none"?"block":"none"; });
+            box.querySelector(".use-btn").addEventListener("click", function(){
+              state.preferredRabaisFor[norm(name)] = alt.item.id;
+              saveState(); render();
+              toast("Le meilleur prix sera utilisé pour " + name + ".");
+            });
+            row.appendChild(box);
+          }
+        }
+
         if(store === "Ajoutés à la main"){
           var del2 = document.createElement("button");
           del2.className = "del2"; del2.textContent = "🗑";
-          del2.addEventListener("click", function(){
-            state.manualItems = state.manualItems.filter(function(m){ return m.nom !== name; });
-            saveState(); render();
-          });
+          del2.addEventListener("click", function(){ state.manualItems = state.manualItems.filter(function(m){ return m.nom !== name; }); saveState(); render(); });
           row.appendChild(del2);
         }
         group.appendChild(row);
@@ -685,7 +1048,7 @@
   function renderRecetteSelect(){
     var sel = document.getElementById("aRecette");
     var current = sel.value; sel.innerHTML = "";
-    RECETTES.forEach(function(r){ var o = document.createElement("option"); o.value = r.id; o.textContent = r.nom; sel.appendChild(o); });
+    allRecettes().forEach(function(r){ var o = document.createElement("option"); o.value = r.id; o.textContent = r.nom; sel.appendChild(o); });
     if(current) sel.value = current;
   }
 
@@ -695,7 +1058,7 @@
     wrap.innerHTML = "";
     state.ratios.slice().reverse().forEach(function(r, revIdx){
       var idx = state.ratios.length - 1 - revIdx;
-      var rec = RECETTES.find(function(x){ return x.id === r.recetteId; });
+      var rec = allRecettes().find(function(x){ return x.id === r.recetteId; });
       var row = document.createElement("div");
       row.className = "ratio-item";
       row.innerHTML = '<div><div class="r-name">' + (rec?rec.nom:r.recetteId) + '</div><div class="r-detail">' + r.multiple + '× la recette de base → ' + r.repas + ' repas/lunchs</div></div>';
@@ -724,7 +1087,7 @@
   });
 
   /* ================= import / auto-fetch ================= */
-  function applyImportedRabais(parsed, sourceLabel){
+  function applyImportedRabais(parsed){
     var list = parsed && parsed.rabais;
     if(!Array.isArray(list)) return false;
     var imported = list.map(function(item){
@@ -751,14 +1114,13 @@
     reader.onload = function(evt){
       var parsed;
       try{ parsed = JSON.parse(evt.target.result); }
-      catch(err){ statusEl.textContent = "Fichier invalide — ce n'est pas du JSON lisible."; return; }
+      catch(err){ statusEl.textContent = "Fichier invalide."; return; }
       var count = applyImportedRabais(parsed);
-      if(!count){ statusEl.textContent = "Fichier reconnu mais aucun rabais exploitable trouvé."; return; }
+      if(!count){ statusEl.textContent = "Fichier reconnu mais aucun rabais exploitable."; return; }
       render();
-      statusEl.textContent = count + " rabais importés" + (parsed.code_postal ? (" pour " + parsed.code_postal) : "") + ".";
+      statusEl.textContent = count + " rabais importés.";
       toast(count + " rabais importés.");
-      document.getElementById("searchRabais").value = "";
-      setTab("rabais");
+      setTab("liste");
     };
     reader.readAsText(file);
     e.target.value = "";
@@ -769,40 +1131,34 @@
       .then(function(resp){ if(!resp.ok) throw new Error("not ok"); return resp.json(); })
       .then(function(parsed){
         var count = applyImportedRabais(parsed);
-        if(count){
-          state.lastAutoSync = new Date().toISOString();
-          saveState(); render();
-          if(!silent) toast(count + " rabais chargés automatiquement.");
-        } else if(!silent){
-          toast("Fichier trouvé mais vide ou illisible.");
-        }
+        if(count){ state.lastAutoSync = new Date().toISOString(); saveState(); render(); if(!silent) toast(count + " rabais chargés automatiquement."); }
+        else if(!silent) toast("Fichier trouvé mais vide ou illisible.");
       })
-      .catch(function(){
-        // Échec attendu quand l'app n'est pas hébergée à côté du fichier
-        // (ex. ici, dans l'artefact Claude) — l'import manuel reste disponible.
-        if(!silent) toast("Chargement automatique impossible ici — utilisez l'import manuel ci-dessous.");
-      });
+      .catch(function(){ if(!silent) toast("Chargement automatique impossible ici — utilise l'import manuel dans Mise à jour."); });
   }
   document.getElementById("btnManualCheck").addEventListener("click", function(){ tryAutoFetch(false); });
 
-  var searchInput = document.getElementById("searchRabais");
-  searchInput.addEventListener("input", debounce(renderSearchResults, 120));
+  document.getElementById("searchRabais").addEventListener("input", debounce(renderSearchResults, 120));
 
-  document.getElementById("inpBudget").addEventListener("input", function(e){ state.budget = parseFloat(e.target.value) || 0; saveState(); renderTopbar(); renderListe(); });
+  document.getElementById("inpBudget").addEventListener("input", function(e){ state.budget = parseFloat(e.target.value) || 0; saveState(); renderTopbar(); renderConfigFields(); renderListe(); });
+  document.getElementById("inpPeriode").addEventListener("change", function(e){ state.budgetPeriode = parseInt(e.target.value) || 1; saveState(); renderTopbar(); renderConfigFields(); renderListe(); });
   document.getElementById("inpPostal").addEventListener("input", function(e){ state.postal = e.target.value; saveState(); });
-  document.getElementById("inpPortions").addEventListener("input", function(e){ state.portionsBase = parseInt(e.target.value) || 4; saveState(); renderMeals(); renderListe(); });
+  document.getElementById("inpPersonnes").addEventListener("change", function(e){ state.nbPersonnes = parseInt(e.target.value) || 4; saveState(); renderMeals(); renderListe(); });
+
   document.getElementById("btnAddMember").addEventListener("click", function(){
     var inp = document.getElementById("inpMember"); var v = inp.value.trim();
-    if(!v) return; state.membres.push(v); inp.value = ""; saveState(); render();
+    if(!v) return; state.famille.push(v); inp.value = ""; saveState(); render();
   });
   document.getElementById("inpMember").addEventListener("keydown", function(e){ if(e.key === "Enter") document.getElementById("btnAddMember").click(); });
+
+  document.getElementById("switchUser").addEventListener("click", pickMember);
 
   document.getElementById("btnAddRabais").addEventListener("click", function(){
     var ing = document.getElementById("rIngredient").value.trim();
     var mag = document.getElementById("rMagasin").value;
     var prix = parseFloat(document.getElementById("rPrix").value);
     var fam = document.getElementById("rFormatFamilial").checked;
-    if(!ing){ toast("Entrez un nom d'ingrédient."); return; }
+    if(!ing){ toast("Entre un nom d'ingrédient."); return; }
     state.rabais.push({id:uid(), ingredient:ing, magasin:mag||"Magasin au choix (aucun rabais associé)", prix: isNaN(prix)?null:prix, familial: fam, image:null});
     document.getElementById("rIngredient").value = ""; document.getElementById("rPrix").value = "";
     document.getElementById("rFormatFamilial").checked = false;
@@ -813,15 +1169,27 @@
     var inp = document.getElementById("inpManualItem"); var v = inp.value.trim();
     if(!v) return;
     state.manualItems.push({id:uid(), nom:v});
-    inp.value = ""; saveState(); render(); toast("Item ajouté à la liste.");
+    inp.value = ""; saveState(); render(); toast("Item ajouté.");
   });
   document.getElementById("inpManualItem").addEventListener("keydown", function(e){ if(e.key === "Enter") document.getElementById("btnAddManualItem").click(); });
+
+  document.getElementById("btnAddCustomMeal").addEventListener("click", function(){
+    var inp = document.getElementById("inpCustomMeal"); var name = inp.value.trim();
+    if(!name) return;
+    var matched = RECETTES.find(function(r){ return matchesQuery(r.nom, name) || matchesQuery(name, r.nom); });
+    var ingredients = matched ? matched.ingredients.slice() : [];
+    var id = "custom-" + uid();
+    state.customMeals.push({id:id, nom:name, categorie: matched?matched.categorie:"personnalise", ingredients: ingredients});
+    inp.value = ""; saveState(); render();
+    toast(matched ? ("Ajouté — ingrédients repris d'une recette similaire (" + matched.nom + "), modifiables.") : "Ajouté — clique « affiner » pour lier des ingrédients.");
+  });
+  document.getElementById("inpCustomMeal").addEventListener("keydown", function(e){ if(e.key === "Enter") document.getElementById("btnAddCustomMeal").click(); });
 
   document.getElementById("btnAddRatio").addEventListener("click", function(){
     var recetteId = document.getElementById("aRecette").value;
     var multiple = parseFloat(document.getElementById("aMultiple").value);
     var repas = parseInt(document.getElementById("aRepas").value);
-    if(!multiple || !repas){ toast("Remplissez la quantité et le nombre de repas obtenus."); return; }
+    if(!multiple || !repas){ toast("Remplis la quantité et le nombre de repas obtenus."); return; }
     state.ratios.push({recetteId: recetteId, multiple: multiple, repas: repas});
     document.getElementById("aMultiple").value = ""; document.getElementById("aRepas").value = "";
     saveState(); render(); toast("Ratio enregistré.");
@@ -865,7 +1233,7 @@
   var d = defaultState();
   Object.keys(d).forEach(function(k){ if(!(k in state)) state[k] = d[k]; });
   render();
-  tryAutoFetch(true); // tentative silencieuse au démarrage — ne fonctionne que si l'app est hébergée à côté du fichier
+  tryAutoFetch(true);
 
 })();
 </script>
